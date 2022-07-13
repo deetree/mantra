@@ -6,9 +6,10 @@ import picocli.CommandLine.Parameters;
 
 /**
  * @author Mariusz Bal
-b */
+ */
 @Command(name = "mantra", description = "Kickstart your Java (Maven) project",
-        showDefaultValues = true, abbreviateSynopsis = true, version = "Mantra version %s")
+        showDefaultValues = true, abbreviateSynopsis = true, version = "Mantra version %s",
+        mixinStandardHelpOptions = true)
 class Arguments {
 
     @Parameters(description = "Project's name")
@@ -34,12 +35,6 @@ class Arguments {
 
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
-
-    @Option(names = {"--help", "-h"}, description = "Show help message", usageHelp = true)
-    boolean helpDemanded;
-
-    @Option(names = {"--version", "-v"}, description = "Show mantra version", versionHelp = true)
-    boolean versionDemanded;
 
     @Override
     public String toString() {
