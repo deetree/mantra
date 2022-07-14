@@ -3,7 +3,6 @@ package com.github.deetree.mantra;
 import picocli.CommandLine;
 
 import static picocli.CommandLine.Help;
-import static picocli.CommandLine.ParseResult;
 
 /**
  * @author Mariusz Bal
@@ -11,16 +10,14 @@ import static picocli.CommandLine.ParseResult;
 class VersionHelper implements Helper {
 
     private final CommandLine cmd;
-    private final ParseResult result;
 
-    VersionHelper(CommandLine cmd, ParseResult result) {
+    VersionHelper(CommandLine cmd) {
         this.cmd = cmd;
-        this.result = result;
     }
 
     @Override
     public boolean checkHelpRequired() {
-        boolean versionHelpRequested = result.isVersionHelpRequested();
+        boolean versionHelpRequested = cmd.isVersionHelpRequested();
         if (versionHelpRequested)
             printHelp();
         return versionHelpRequested;

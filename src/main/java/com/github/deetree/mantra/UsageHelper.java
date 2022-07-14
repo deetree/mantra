@@ -9,16 +9,14 @@ import picocli.CommandLine.ParseResult;
 class UsageHelper implements Helper {
 
     private final CommandLine cmd;
-    private final ParseResult result;
 
-    UsageHelper(CommandLine cmd, ParseResult result) {
+    UsageHelper(CommandLine cmd) {
         this.cmd = cmd;
-        this.result = result;
     }
 
     @Override
     public boolean checkHelpRequired() {
-        boolean usageHelpRequested = result.isUsageHelpRequested();
+        boolean usageHelpRequested = cmd.isUsageHelpRequested();
         if (usageHelpRequested)
             printHelp();
         return usageHelpRequested;
