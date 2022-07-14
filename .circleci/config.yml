@@ -9,7 +9,7 @@ executors:
       - image: 'cimg/openjdk:17.0.3'
 
 workflows:
-  maven_test:
+  maven_verify:
     jobs:
       - maven/verify:
           executor: example
