@@ -21,7 +21,7 @@ class Arguments {
     @Option(names = {"--group", "-g"}, description = "Project's groupId")
     String groupId = "com.example";
 
-    @Option(names = {"--artifact", "-a"}, description = "Project's artifactId")
+    @Option(names = {"--artifact", "-a"}, description = "Project's artifactId", defaultValue = "project's name")
     String artifactId;
 
     @Option(names = {"--main-class", "-m"}, description = "Main class name")
@@ -38,5 +38,5 @@ class Arguments {
 
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
-    
+
 }
