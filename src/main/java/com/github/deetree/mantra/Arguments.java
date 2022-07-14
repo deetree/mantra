@@ -38,18 +38,5 @@ class Arguments {
 
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
-
-    @Override
-    public String toString() {
-        return "Arguments{" +
-                "name='" + name + '\'' +
-                ", directory='" + directory + '\'' +
-                ", groupId='" + groupId + '\'' +
-                ", artifactId='" + artifactId + '\'' +
-                ", javaVersion=" + javaVersion +
-                ", disableGit=" + disableGit +
-                ", gitUsername='" + gitUsername + '\'' +
-                ", gitEmail='" + gitEmail + '\'' +
-                '}';
-    }
+    
 }
