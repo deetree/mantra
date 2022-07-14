@@ -11,5 +11,5 @@ executors:
 workflows:
   maven_test:
     jobs:
-      - maven/test:
+      - maven/verify:
           executor: example
