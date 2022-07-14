@@ -24,6 +24,9 @@ class Arguments {
     @Option(names = {"--artifact", "-a"}, description = "Project's artifactId")
     String artifactId;
 
+    @Option(names = {"--main-class", "-m"}, description = "Main class name")
+    String mainClass = "Main";
+
     @Option(names = {"--java", "-j"}, description = "Java version")
     int javaVersion = 17;
 
