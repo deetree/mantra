@@ -13,3 +13,4 @@ workflows:
     jobs:
       - maven/test:
           command: 'verify'
+          executor: example
