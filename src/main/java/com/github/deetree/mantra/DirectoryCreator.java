@@ -17,8 +17,7 @@ interface DirectoryCreator {
             Files.createDirectories(path);
             return Result.OK;
         } catch (IOException e) {
-            System.err.println("An error occurred while creating directories structure. Check the path.");
+            throw new ActionException("An error occurred while creating directories structure. Check the path.");
         }
-        return Result.ERROR;
     }
 }
