@@ -8,6 +8,6 @@ import java.io.InputStream;
 interface ResourceFileLoader {
 
     static InputStream load(String fileName) {
-        return ResourceFileLoader.class.getResourceAsStream(fileName);
+        return ResourceFileLoader.class.getResourceAsStream("/" + fileName);
     }
 }

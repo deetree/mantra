@@ -17,11 +17,12 @@ class GitignoreCreator implements FileCreator {
 
     @Override
     public void create() {
-        InputStream gitignore = ResourceFileLoader.load(".gitignore");
+        final String fileName = "gitignore";
+        InputStream gitignore = ResourceFileLoader.load(fileName);
         try {
-            Files.copy(gitignore, projectPath, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(gitignore, projectPath.resolve("." + fileName), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            //todo throw new ActionException("An error occurred during .gitignore file creation");
+            throw new ActionException("An error occurred during .gitignore file creation");
         }
     }
 }
