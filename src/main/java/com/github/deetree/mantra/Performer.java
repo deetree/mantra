@@ -33,6 +33,7 @@ class Performer {
             try {
                 createStructure(projectPath, javaMainFilesPath, mainResourcesPath,
                         javaTestFilesPath, testResourcesPath);
+                createGitignore(projectPath);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -48,5 +49,9 @@ class Performer {
         new ProjectDirectoryCreator(projectPath).create();
         new CodeDirectoryCreator(javaMainFilesPath, mainResourcesPath).create();
         new CodeDirectoryCreator(javaTestFilesPath, testResourcesPath).create();
+    }
+
+    private void createGitignore(Path projectPath) {
+        new GitignoreCreator(projectPath).create();
     }
 }
