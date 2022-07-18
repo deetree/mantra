@@ -21,6 +21,7 @@
         <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
         <testng.version>7.6.0</testng.version>
         <picocli.version>4.6.3</picocli.version>
+        <maven.failsafe.plugin.version>3.0.0-M7</maven.failsafe.plugin.version>
     </properties>
 
     <dependencies>
@@ -82,6 +83,12 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
