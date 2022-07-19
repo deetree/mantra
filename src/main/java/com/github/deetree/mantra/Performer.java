@@ -36,6 +36,8 @@ class Performer {
                 createGitignore(projectPath);
                 createPom(projectPath, arguments.groupId, arguments.artifactId,
                         arguments.mainClass, arguments.javaVersion);
+                createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
+                createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -59,5 +61,13 @@ class Performer {
 
     private void createPom(Path projectPath, String groupId, String artifactId, String mainClass, int javaVersion) {
         new PomCreator(projectPath, groupId, artifactId, mainClass, String.valueOf(javaVersion)).create();
+    }
+
+    private void createMain(Path mainJavaFilesPath, String groupId, String artifactId, String mainClass) {
+        new MainClassCreator(mainJavaFilesPath, groupId, artifactId, mainClass).create();
+    }
+
+    private void createMainTest(Path testJavaFilesPath, String groupId, String artifactId, String mainClass) {
+        new TestClassCreator(testJavaFilesPath, groupId, artifactId, mainClass).create();
     }
 }
