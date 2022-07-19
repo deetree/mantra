@@ -34,6 +34,8 @@ class Performer {
                 createStructure(projectPath, javaMainFilesPath, mainResourcesPath,
                         javaTestFilesPath, testResourcesPath);
                 createGitignore(projectPath);
+                createPom(projectPath, arguments.groupId, arguments.artifactId,
+                        arguments.mainClass, arguments.javaVersion);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -53,5 +55,9 @@ class Performer {
 
     private void createGitignore(Path projectPath) {
         new GitignoreCreator(projectPath).create();
+    }
+
+    private void createPom(Path projectPath, String groupId, String artifactId, String mainClass, int javaVersion) {
+        new PomCreator(projectPath, groupId, artifactId, mainClass, String.valueOf(javaVersion)).create();
     }
 }
