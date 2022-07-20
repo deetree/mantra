@@ -18,7 +18,7 @@ class InitializeGitCommand implements NativeCommand {
     @Override
     public Result execute() {
         if (execute(os, projectPath, "git init") != Result.OK)
-            throw new ActionException("An exception occurred while git repository initialization");
+            throw new ActionException("An exception occurred during git repository initialization");
         return Result.OK;
     }
 }
