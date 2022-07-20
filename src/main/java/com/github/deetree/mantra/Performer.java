@@ -41,6 +41,7 @@ class Performer {
                 OS os = new OperatingSystem().identify();
                 initializeGitRepo(projectPath, os);
                 configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
+                createInitCommit(projectPath, os);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -80,5 +81,9 @@ class Performer {
 
     private void configureGitUserInfo(Path projectPath, OS os, String gitUsername, String gitUserEmail) {
         new LocalGitUserConfigCommand(os, projectPath, gitUsername, gitUserEmail).execute();
+    }
+
+    private void createInitCommit(Path projectPath, OS os) {
+        new CreateInitCommitCommand(os, projectPath).execute();
     }
 }
