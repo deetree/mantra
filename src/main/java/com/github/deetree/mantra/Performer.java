@@ -40,6 +40,7 @@ class Performer {
                 createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
                 OS os = new OperatingSystem().identify();
                 initializeGitRepo(projectPath, os);
+                configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -75,5 +76,9 @@ class Performer {
 
     private void initializeGitRepo(Path projectPath, OS os) {
         new InitializeGitCommand(os, projectPath).execute();
+    }
+
+    private void configureGitUserInfo(Path projectPath, OS os, String gitUsername, String gitUserEmail) {
+        new LocalGitUserConfigCommand(os, projectPath, gitUsername, gitUserEmail).execute();
     }
 }
