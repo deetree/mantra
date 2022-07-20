@@ -38,6 +38,8 @@ class Performer {
                         arguments.mainClass, arguments.javaVersion);
                 createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
                 createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
+                OS os = new OperatingSystem().identify();
+                initializeGitRepo(projectPath, os);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -69,5 +71,9 @@ class Performer {
 
     private void createMainTest(Path testJavaFilesPath, String groupId, String artifactId, String mainClass) {
         new TestClassCreator(testJavaFilesPath, groupId, artifactId, mainClass).create();
+    }
+
+    private void initializeGitRepo(Path projectPath, OS os) {
+        new InitializeGitCommand(os, projectPath).execute();
     }
 }
