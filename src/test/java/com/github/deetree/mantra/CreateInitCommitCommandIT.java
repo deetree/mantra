@@ -18,8 +18,9 @@ public class CreateInitCommitCommandIT {
         Path gitRefsHeadsPath = dirPath.resolve(Path.of(".git", "refs", "heads"));
         Files.createFile(dirPath.resolve("sampleFile"));
         OS os = new OperatingSystem().identify();
-        //w
         new InitializeGitCommand(os, dirPath).execute();
+        new LocalGitUserConfigCommand(os, dirPath, "test", "test@test.com").execute();
+        //w
         new CreateInitCommitCommand(os, dirPath).execute();
         //t
         SoftAssert sa = new SoftAssert();
