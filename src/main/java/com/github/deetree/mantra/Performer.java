@@ -38,6 +38,10 @@ class Performer {
                         arguments.mainClass, arguments.javaVersion);
                 createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
                 createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
+                OS os = new OperatingSystem().identify();
+                initializeGitRepo(projectPath, os);
+                configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
+                createInitCommit(projectPath, os);
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
@@ -69,5 +73,17 @@ class Performer {
 
     private void createMainTest(Path testJavaFilesPath, String groupId, String artifactId, String mainClass) {
         new TestClassCreator(testJavaFilesPath, groupId, artifactId, mainClass).create();
+    }
+
+    private void initializeGitRepo(Path projectPath, OS os) {
+        new InitializeGitCommand(os, projectPath).execute();
+    }
+
+    private void configureGitUserInfo(Path projectPath, OS os, String gitUsername, String gitUserEmail) {
+        new LocalGitUserConfigCommand(os, projectPath, gitUsername, gitUserEmail).execute();
+    }
+
+    private void createInitCommit(Path projectPath, OS os) {
+        new CreateInitCommitCommand(os, projectPath).execute();
     }
 }
