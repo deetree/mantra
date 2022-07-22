@@ -9,4 +9,9 @@ class ConsolePrinter implements Printer {
     public void print(Level level, String text) {
         System.out.printf("[%s%s%s] %s%n", level.color().toString(), level.name(), Color.RESET, text);
     }
+
+    @Override
+    public void print(String text) {
+        System.out.println(text);
+    }
 }
