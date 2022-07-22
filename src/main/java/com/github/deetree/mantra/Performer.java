@@ -109,4 +109,8 @@ class Performer {
     private void createInitCommit(Path projectPath, OS os) {
         new CreateInitCommitCommand(os, projectPath).execute();
     }
+
+    private void openIntelliJ(Path projectPath, OS os) {
+        new OpenIntelliJCommand(os, projectPath).execute();
+    }
 }
