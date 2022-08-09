@@ -53,8 +53,8 @@ class Performer {
                 printer.print(Level.SUCCESS, "Test class created");
                 printer.print(Level.INFO, "Identifying operating system");
                 OS os = new OperatingSystem().identify();
+                printer.print(Level.SUCCESS, "Operating system identified (%s)".formatted(os.name()));
                 if (!arguments.disableGit) {
-                    printer.print(Level.SUCCESS, "Operating system identified (%s)".formatted(os.name()));
                     printer.print(Level.INFO, "Initializing local git repository");
                     initializeGitRepo(projectPath, os);
                     printer.print(Level.SUCCESS, "Git repository initialized successfully");
