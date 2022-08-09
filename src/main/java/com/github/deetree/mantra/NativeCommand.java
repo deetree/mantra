@@ -32,8 +32,9 @@ interface NativeCommand {
     private void readProcessOutput(Process process) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
+        Printer printer = new ConsolePrinter();
         while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+            printer.print(line);
         }
     }
 

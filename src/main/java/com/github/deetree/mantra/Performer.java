@@ -22,6 +22,8 @@ class Performer {
 
         if (!wasHelpUsed(usage, version)) {
             Arguments arguments = parsingResult.arguments();
+            Printer printer = new ConsolePrinter();
+            printer.print(Level.INFO, "Resolving paths");
             Path projectPath = new ProjectPathResolver(arguments.directory, arguments.name).resolve();
             Path sourcesPath = new SourcePathResolver(projectPath).resolve();
             Path packagePath = new PackagePathResolver(arguments.groupId, arguments.artifactId).resolve();
@@ -29,23 +31,42 @@ class Performer {
             Path mainResourcesPath = new ResourcesPathResolver(sourcesPath, Directory.MAIN).resolve();
             Path javaTestFilesPath = new JavaFilesPathResolver(sourcesPath, Directory.TEST, packagePath).resolve();
             Path testResourcesPath = new ResourcesPathResolver(sourcesPath, Directory.TEST).resolve();
+            printer.print(Level.SUCCESS, "Resolving paths completed successfully");
 
             try {
+                printer.print(Level.INFO, "Creating directories structure");
                 createStructure(projectPath, javaMainFilesPath, mainResourcesPath,
                         javaTestFilesPath, testResourcesPath);
+                printer.print(Level.SUCCESS, "Directories structure created successfully");
+                printer.print(Level.INFO, "Creating basic .gitignore file");
                 createGitignore(projectPath);
+                printer.print(Level.SUCCESS, "Basic .gitignore file created");
+                printer.print(Level.INFO, "Creating basic POM file");
                 createPom(projectPath, arguments.groupId, arguments.artifactId,
                         arguments.mainClass, arguments.javaVersion);
+                printer.print(Level.SUCCESS, "Basic POM file created");
+                printer.print(Level.INFO, "Creating main class");
                 createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
+                printer.print(Level.SUCCESS, "Main class created");
+                printer.print(Level.INFO, "Creating test class");
                 createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
+                printer.print(Level.SUCCESS, "Test class created");
+                printer.print(Level.INFO, "Identifying operating system");
                 OS os = new OperatingSystem().identify();
+                printer.print(Level.SUCCESS, "Operating system identified (%s)".formatted(os.name()));
                 if (!arguments.disableGit) {
+                    printer.print(Level.INFO, "Initializing local git repository");
                     initializeGitRepo(projectPath, os);
+                    printer.print(Level.SUCCESS, "Git repository initialized successfully");
+                    printer.print(Level.INFO, "Configuring git repository");
                     configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
+                    printer.print(Level.SUCCESS, "Git repository configured");
+                    printer.print(Level.INFO, "Creating initial commit");
                     createInitCommit(projectPath, os);
+                    printer.print(Level.SUCCESS, "Initial commit created");
                 }
             } catch (ActionException e) {
-                System.err.println(e.getMessage());
+                printer.print(Level.ERROR, e.getMessage());
             }
         }
     }
