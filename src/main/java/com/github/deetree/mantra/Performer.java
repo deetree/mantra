@@ -39,9 +39,11 @@ class Performer {
                 createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
                 createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
                 OS os = new OperatingSystem().identify();
-                initializeGitRepo(projectPath, os);
-                configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
-                createInitCommit(projectPath, os);
+                if (!arguments.disableGit) {
+                    initializeGitRepo(projectPath, os);
+                    configureGitUserInfo(projectPath, os, arguments.gitUsername, arguments.gitEmail);
+                    createInitCommit(projectPath, os);
+                }
             } catch (ActionException e) {
                 System.err.println(e.getMessage());
             }
