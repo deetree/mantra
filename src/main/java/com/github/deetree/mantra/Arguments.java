@@ -10,7 +10,7 @@ import picocli.CommandLine.Parameters;
 @Command(name = "mantra", description = "Kickstart your Java (Maven) project",
         showDefaultValues = true, abbreviateSynopsis = true, version = "Mantra version %s",
         mixinStandardHelpOptions = true)
-class Arguments {
+class Arguments implements Runnable {
 
     @Parameters(description = "Project's name")
     String name;
@@ -21,7 +21,7 @@ class Arguments {
     @Option(names = {"--group", "-g"}, description = "Project's groupId")
     String groupId = "com.example";
 
-    @Option(names = {"--artifact", "-a"}, description = "Project's artifactId", defaultValue = "project's name")
+    @Option(names = {"--artifact", "-a"}, description = "Project's artifactId (default: project's name)")
     String artifactId;
 
     @Option(names = {"--main-class", "-m"}, description = "Main class name")
@@ -39,4 +39,9 @@ class Arguments {
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
 
+    @Override
+    public void run() {
+        if (artifactId == null)
+            artifactId = name;
+    }
 }

@@ -18,7 +18,7 @@ class CLIParser {
         CommandLine cmd = new CommandLine(arguments);
         cmd.setOverwrittenOptionsAllowed(true);
         cmd.setUnmatchedArgumentsAllowed(true);
-        ParseResult parseResult = cmd.parseArgs(args);
-        return new Trio(cmd, parseResult, arguments);
+        cmd.execute(args);
+        return new Trio(cmd, null, arguments);
     }
 }
