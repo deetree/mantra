@@ -17,7 +17,7 @@ class CreateInitCommitCommand implements NativeCommand {
 
     @Override
     public Result execute() {
-        if (execute(os, projectPath, "git add . && git commit -m 'Initial commit'") != Result.OK)
+        if (execute(os, projectPath, "git add . && git commit -m \"Initial commit\"") != Result.OK)
             throw new ActionException("An exception occurred during initial git commit creation");
         return Result.OK;
     }

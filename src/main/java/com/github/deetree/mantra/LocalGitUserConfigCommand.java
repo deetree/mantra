@@ -33,7 +33,7 @@ class LocalGitUserConfigCommand implements NativeCommand {
     }
 
     private Result configure(String configElement, String value) {
-        if (execute(os, projectPath, "git config user.%s '%s'".formatted(configElement, value)) != Result.OK)
+        if (execute(os, projectPath, "git config user.%s \"%s\"".formatted(configElement, value)) != Result.OK)
             throw new ActionException("An exception occurred during git user %s configuration"
                     .formatted(configElement));
         return Result.OK;
