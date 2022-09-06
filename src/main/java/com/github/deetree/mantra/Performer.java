@@ -68,7 +68,7 @@ class Performer {
                 printer.print(Level.INFO, "Opening the project in IntelliJ IDEA");
                 openIntelliJ(projectPath, os);
                 printer.print(Level.SUCCESS, "Project opened successfully");
-            } catch (ActionException e) {
+            } catch (ActionException | OSNotSupportedException e) {
                 printer.print(Level.ERROR, e.getMessage());
             }
         }

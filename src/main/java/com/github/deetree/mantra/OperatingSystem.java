@@ -9,7 +9,8 @@ class OperatingSystem {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("windows"))
             return OS.WINDOWS;
-        else //if (os.contains("nux") || os.contains("nix"))
+        else if (os.contains("nux") || os.contains("nix"))
             return OS.LINUX;
+        else throw new OSNotSupportedException("This operating system (%s) is not supported".formatted(os));
     }
 }
