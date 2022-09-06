@@ -19,9 +19,9 @@ class Performer {
         CommandLine.ParseResult result = parsingResult.result();
         Helper usage = new UsageHelper(cmd);
         Helper version = new VersionHelper(cmd);
+        Arguments arguments = parsingResult.arguments();
 
-        if (!wasHelpUsed(usage, version)) {
-            Arguments arguments = parsingResult.arguments();
+        if (!wasHelpUsed(usage, version) && arguments.name != null) {
             Printer printer = new ConsolePrinter();
             printer.print(Level.INFO, "Resolving paths");
             Path projectPath = new ProjectPathResolver(arguments.directory, arguments.name).resolve();
