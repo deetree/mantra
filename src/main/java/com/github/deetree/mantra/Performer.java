@@ -65,6 +65,9 @@ class Performer {
                     createInitCommit(projectPath, os);
                     printer.print(Level.SUCCESS, "Initial commit created");
                 }
+                printer.print(Level.INFO, "Opening the project in IntelliJ IDEA");
+                openIntelliJ(projectPath, os);
+                printer.print(Level.SUCCESS, "Project opened successfully");
             } catch (ActionException e) {
                 printer.print(Level.ERROR, e.getMessage());
             }
@@ -108,5 +111,9 @@ class Performer {
 
     private void createInitCommit(Path projectPath, OS os) {
         new CreateInitCommitCommand(os, projectPath).execute();
+    }
+
+    private void openIntelliJ(Path projectPath, OS os) {
+        new OpenIntelliJCommand(os, projectPath).execute();
     }
 }
