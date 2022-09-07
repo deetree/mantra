@@ -1,4 +1,4 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.pathresolver;
 
 import java.nio.file.Path;
 
@@ -6,7 +6,7 @@ import java.nio.file.Path;
  * @author Mariusz Bal
  */
 @FunctionalInterface
-interface PathResolver {
+interface Resolver {
 
     Path resolve();
 

@@ -1,16 +1,16 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.pathresolver;
 
 import java.nio.file.Path;
 
 /**
  * @author Mariusz Bal
  */
-class ResourcesPathResolver implements PathResolver {
+class ResourcesPathResolver implements Resolver {
 
     private final Path sourcesPath;
     private final Directory parent;
 
-    public ResourcesPathResolver(Path sourcesPath, Directory parent) {
+    ResourcesPathResolver(Path sourcesPath, Directory parent) {
         this.sourcesPath = sourcesPath;
         this.parent = parent;
     }

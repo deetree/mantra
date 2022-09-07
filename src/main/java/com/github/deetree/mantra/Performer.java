@@ -2,11 +2,11 @@ package com.github.deetree.mantra;
 
 import com.github.deetree.mantra.creator.Creator;
 import com.github.deetree.mantra.oscmd.Command;
+import com.github.deetree.mantra.pathresolver.PathResolver;
+import com.github.deetree.mantra.pathresolver.ResolvedPaths;
 import com.github.deetree.mantra.printer.Level;
 import com.github.deetree.mantra.printer.Printer;
 import picocli.CommandLine;
-
-import java.nio.file.Path;
 
 /**
  * @author Mariusz Bal
@@ -28,25 +28,21 @@ class Performer {
         if (!wasHelpUsed(usage, version) && arguments.name != null) {
             Printer printer = Printer.getDefault();
             printer.print(Level.INFO, "Resolving paths");
-            Path projectPath = new ProjectPathResolver(arguments.directory, arguments.name).resolve();
-            Path sourcesPath = new SourcePathResolver(projectPath).resolve();
-            Path packagePath = new PackagePathResolver(arguments.groupId, arguments.artifactId).resolve();
-            Path javaMainFilesPath = new JavaFilesPathResolver(sourcesPath, Directory.MAIN, packagePath).resolve();
-            Path mainResourcesPath = new ResourcesPathResolver(sourcesPath, Directory.MAIN).resolve();
-            Path javaTestFilesPath = new JavaFilesPathResolver(sourcesPath, Directory.TEST, packagePath).resolve();
-            Path testResourcesPath = new ResourcesPathResolver(sourcesPath, Directory.TEST).resolve();
+            ResolvedPaths paths = new PathResolver(arguments.directory, arguments.name,
+                    arguments.groupId, arguments.artifactId).resolvePaths();
             printer.print(Level.SUCCESS, "Resolving paths completed successfully");
 
             try {
                 printer.print(Level.INFO, "Creating project");
-                Creator.of(projectPath, javaMainFilesPath, mainResourcesPath,
-                        javaTestFilesPath, testResourcesPath, arguments.groupId,
+                Creator.of(paths.projectPath(), paths.javaMainFilesPath(), paths.mainResourcesPath(),
+                        paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
                         arguments.artifactId, arguments.mainClass, arguments.javaVersion).create();
                 printer.print(Level.SUCCESS, "Project created successfully");
                 printer.print(Level.INFO, "Identifying operating system");
                 OS os = new OperatingSystem().identify();
                 printer.print(Level.SUCCESS, "Operating system identified (%s)".formatted(os.name()));
-                Command command = Command.getDefault(projectPath, os, arguments.gitUsername, arguments.gitEmail);
+                Command command = Command.getDefault(paths.projectPath(), os,
+                        arguments.gitUsername, arguments.gitEmail);
                 if (!arguments.disableGit)
                     command.executeGit();
                 command.openIntelliJ();

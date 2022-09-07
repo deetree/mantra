@@ -1,4 +1,4 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.pathresolver;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -6,7 +6,7 @@ import java.nio.file.Path;
 /**
  * @author Mariusz Bal
  */
-class PackagePathResolver implements PathResolver {
+class PackagePathResolver implements Resolver {
 
     private final String groupId;
     private final String artifactId;

@@ -1,4 +1,4 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.pathresolver;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +17,7 @@ public class PathResolverTest {
     private final String group = "com.xyz.abc.def";
     private final String artifact = "cosmonaut";
     private final char separator = File.separatorChar;
-    private PathResolver resolver;
+    private Resolver resolver;
 
     public void shouldCreateProperProjectPath() {
         //g
