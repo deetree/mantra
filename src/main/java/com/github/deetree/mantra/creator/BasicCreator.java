@@ -5,7 +5,7 @@ import com.github.deetree.mantra.printer.Level;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Mariusz Bal
@@ -46,12 +46,11 @@ class BasicCreator implements Creator {
     }
 
     private void createDirectoryStructure() {
-        List<DirectoryCreator> creators = List.of(
+        Stream.of(
                 new ProjectDirectoryCreator(projectPath),
                 new CodeDirectoryCreator(javaMainFilesPath, mainResourcesPath),
                 new CodeDirectoryCreator(javaTestFilesPath, testResourcesPath)
-        );
-        creators.forEach(this::executeCreator);
+        ).forEach(this::executeCreator);
     }
 
     private void executeCreator(DirectoryCreator creator) {
@@ -67,12 +66,11 @@ class BasicCreator implements Creator {
     }
 
     private void createBasicFiles() {
-        List<FileCreator> creators = List.of(
+        Stream.of(
                 new GitignoreCreator(projectPath),
                 new PomCreator(projectPath, groupId, artifactId, mainClass, String.valueOf(javaVersion)),
                 new MainClassCreator(javaMainFilesPath, groupId, artifactId, mainClass),
                 new TestClassCreator(javaTestFilesPath, groupId, artifactId, mainClass)
-        );
-        creators.forEach(this::executeCreator);
+        ).forEach(this::executeCreator);
     }
 }
