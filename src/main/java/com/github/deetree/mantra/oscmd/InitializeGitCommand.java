@@ -1,4 +1,8 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
+
+import com.github.deetree.mantra.ActionException;
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.Result;
 
 import java.nio.file.Path;
 
@@ -16,9 +20,19 @@ class InitializeGitCommand implements NativeCommand {
     }
 
     @Override
+    public String preExecuteStatus() {
+        return "Initializing local git repository";
+    }
+
+    @Override
     public Result execute() {
         if (execute(os, projectPath, "git init") != Result.OK)
             throw new ActionException("An exception occurred during git repository initialization");
         return Result.OK;
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Git repository initialized successfully";
     }
 }

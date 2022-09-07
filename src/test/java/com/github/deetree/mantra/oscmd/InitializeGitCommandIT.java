@@ -1,5 +1,7 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
 
+import com.github.deetree.mantra.OperatingSystem;
+import com.github.deetree.mantra.Result;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 

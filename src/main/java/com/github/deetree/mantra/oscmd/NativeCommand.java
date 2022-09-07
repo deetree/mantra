@@ -1,5 +1,7 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
 
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.Result;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.io.BufferedReader;
@@ -12,10 +14,13 @@ import java.util.List;
 /**
  * @author Mariusz Bal
  */
-@FunctionalInterface
 interface NativeCommand {
 
+    String preExecuteStatus();
+
     Result execute();
+
+    String postExecuteStatus();
 
     default Result execute(OS os, Path directory, String command) {
         ProcessBuilder processBuilder = new ProcessBuilder();

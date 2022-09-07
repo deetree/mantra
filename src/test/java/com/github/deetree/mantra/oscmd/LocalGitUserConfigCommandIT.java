@@ -1,5 +1,7 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
 
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.OperatingSystem;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,9 +20,9 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class LocalGitUserConfigCommandIT {
 
+    private final OS os = new OperatingSystem().identify();
     private Path dirPath;
     private Path gitPath;
-    private final OS os = new OperatingSystem().identify();
 
     @BeforeMethod
     private void setUp() throws IOException {

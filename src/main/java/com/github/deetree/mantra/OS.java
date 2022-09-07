@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Mariusz Bal
  */
-enum OS {
+public enum OS {
     WINDOWS(List.of("cmd.exe", "/c")),
     LINUX(List.of("sh", "-c"));
 
@@ -15,7 +15,7 @@ enum OS {
         this.shellCommand = shellCommand;
     }
 
-    List<String> shellCommand() {
+    public List<String> shellCommand() {
         return shellCommand;
     }
 

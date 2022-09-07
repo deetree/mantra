@@ -1,4 +1,8 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
+
+import com.github.deetree.mantra.ActionException;
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.Result;
 
 import java.nio.file.Path;
 
@@ -20,12 +24,22 @@ class LocalGitUserConfigCommand implements NativeCommand {
     }
 
     @Override
+    public String preExecuteStatus() {
+        return "Configuring git repository";
+    }
+
+    @Override
     public Result execute() {
         if (isValid(user))
             configure("name", user);
         if (isValid(email))
             configure("email", email);
         return Result.OK;
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Git repository configured";
     }
 
     private boolean isValid(CharSequence element) {

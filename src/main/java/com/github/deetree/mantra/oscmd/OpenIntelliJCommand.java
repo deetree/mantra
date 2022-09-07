@@ -1,4 +1,8 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.oscmd;
+
+import com.github.deetree.mantra.ActionException;
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.Result;
 
 import java.nio.file.Path;
 
@@ -16,10 +20,20 @@ class OpenIntelliJCommand implements NativeCommand {
     }
 
     @Override
+    public String preExecuteStatus() {
+        return "Opening the project in IntelliJ IDEA";
+    }
+
+    @Override
     public Result execute() {
         if (execute(os, projectPath, findCommand().formatted(projectPath)) != Result.OK)
             throw new ActionException("An exception occurred during IntelliJ IDEA opening");
         return Result.OK;
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Project opened successfully";
     }
 
     private String findCommand() {

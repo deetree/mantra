@@ -13,8 +13,8 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class ConsolePrinterIT {
 
-    private ByteArrayOutputStream output;
     private final Printer printer = new ConsolePrinter();
+    private ByteArrayOutputStream output;
 
     @BeforeMethod
     public void setUp() {
