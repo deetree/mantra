@@ -1,5 +1,8 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.printer;
 
+import com.github.deetree.mantra.printer.ConsolePrinter;
+import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Printer;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

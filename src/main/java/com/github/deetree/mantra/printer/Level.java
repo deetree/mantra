@@ -1,9 +1,9 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.printer;
 
 /**
  * @author Mariusz Bal
  */
-enum Level {
+public enum Level {
     ERROR(Color.RED),
     WARNING(Color.YELLOW),
     SUCCESS(Color.GREEN),

@@ -1,5 +1,7 @@
 package com.github.deetree.mantra;
 
+import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Printer;
 import picocli.CommandLine;
 
 import java.nio.file.Path;
@@ -22,7 +24,7 @@ class Performer {
         Arguments arguments = parsingResult.arguments();
 
         if (!wasHelpUsed(usage, version) && arguments.name != null) {
-            Printer printer = new ConsolePrinter();
+            Printer printer = Printer.getDefault();
             printer.print(Level.INFO, "Resolving paths");
             Path projectPath = new ProjectPathResolver(arguments.directory, arguments.name).resolve();
             Path sourcesPath = new SourcePathResolver(projectPath).resolve();

@@ -1,5 +1,7 @@
 package com.github.deetree.mantra;
 
+import com.github.deetree.mantra.printer.Printer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,7 +34,7 @@ interface NativeCommand {
     private void readProcessOutput(Process process) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
-        Printer printer = new ConsolePrinter();
+        Printer printer = Printer.getDefault();
         while ((line = reader.readLine()) != null) {
             printer.print(line);
         }
