@@ -1,8 +1,11 @@
 package com.github.deetree.mantra.creator;
 
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
+import java.util.List;
 
 /**
  * @author Mariusz Bal
@@ -14,6 +17,8 @@ class BasicCreator implements Creator {
     private final Path mainResourcesPath;
     private final Path javaTestFilesPath;
     private final Path testResourcesPath;
+
+    private final Printer printer = Printer.getDefault();
 
     BasicCreator(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
                  Path javaTestFilesPath, Path testResourcesPath) {
@@ -32,9 +37,18 @@ class BasicCreator implements Creator {
     }
 
     private void createDirectoryStructure() {
-        new ProjectDirectoryCreator(projectPath).create();
-        new CodeDirectoryCreator(javaMainFilesPath, mainResourcesPath).create();
-        new CodeDirectoryCreator(javaTestFilesPath, testResourcesPath).create();
+        List<DirectoryCreator> creators = List.of(
+                new ProjectDirectoryCreator(projectPath),
+                new CodeDirectoryCreator(javaMainFilesPath, mainResourcesPath),
+                new CodeDirectoryCreator(javaTestFilesPath, testResourcesPath)
+        );
+        creators.forEach(this::executeCreator);
+    }
+
+    private void executeCreator(DirectoryCreator creator) {
+        printer.print(Level.INFO, creator.preExecuteStatus());
+        creator.create();
+        printer.print(Level.SUCCESS, creator.postExecuteStatus());
     }
 
     private void createBasicFiles() {
