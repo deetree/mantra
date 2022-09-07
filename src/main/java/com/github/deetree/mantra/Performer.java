@@ -1,5 +1,6 @@
 package com.github.deetree.mantra;
 
+import com.github.deetree.mantra.creator.Creator;
 import com.github.deetree.mantra.printer.Level;
 import com.github.deetree.mantra.printer.Printer;
 import picocli.CommandLine;
@@ -82,9 +83,7 @@ class Performer {
 
     private void createStructure(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
                                  Path javaTestFilesPath, Path testResourcesPath) {
-        new ProjectDirectoryCreator(projectPath).create();
-        new CodeDirectoryCreator(javaMainFilesPath, mainResourcesPath).create();
-        new CodeDirectoryCreator(javaTestFilesPath, testResourcesPath).create();
+        Creator.of(projectPath, javaMainFilesPath, mainResourcesPath, javaTestFilesPath, testResourcesPath).create();
     }
 
     private void createGitignore(Path projectPath) {
