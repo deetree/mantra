@@ -1,4 +1,6 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
+
+import com.github.deetree.mantra.ActionException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,14 +24,24 @@ class TestClassCreator implements FileCreator {
     }
 
     @Override
+    public String preExecuteStatus() {
+        return "Creating test class";
+    }
+
+    @Override
     public void create() {
-        InputStream pom = ResourceFileLoader.load("MainTest.java");
+        InputStream pom = ResourceFileLoader.load("MainTest.java");//todo check
         try {
             new FileWriter(testJavaFilesPath.resolve(mainClass + "Test.java"),
                     replaceVariables(new String(pom.readAllBytes()))).write();
         } catch (IOException e) {
             throw new ActionException("An error occurred during main class test creation");
         }
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Test class created";
     }
 
     private String replaceVariables(String pom) {

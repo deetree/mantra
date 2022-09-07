@@ -1,4 +1,6 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
+
+import com.github.deetree.mantra.ActionException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +24,11 @@ class MainClassCreator implements FileCreator {
     }
 
     @Override
+    public String preExecuteStatus() {
+        return "Creating main class";
+    }
+
+    @Override
     public void create() {
         InputStream pom = ResourceFileLoader.load("Main.java");
         try {
@@ -30,6 +37,11 @@ class MainClassCreator implements FileCreator {
         } catch (IOException e) {
             throw new ActionException("An error occurred during main class creation");
         }
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Main class created";
     }
 
     private String replaceVariables(String pom) {

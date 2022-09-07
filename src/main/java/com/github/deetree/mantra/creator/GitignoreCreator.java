@@ -1,4 +1,6 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
+
+import com.github.deetree.mantra.ActionException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,11 @@ class GitignoreCreator implements FileCreator {
     GitignoreCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override
+    public String preExecuteStatus() {
+        return "Creating basic .gitignore file";
+    }
+
+    @Override
     public void create() {
         final String fileName = "gitignore";
         InputStream gitignore = ResourceFileLoader.load(fileName);
@@ -24,5 +31,10 @@ class GitignoreCreator implements FileCreator {
         } catch (IOException e) {
             throw new ActionException("An error occurred during .gitignore file creation");
         }
+    }
+
+    @Override
+    public String postExecuteStatus() {
+        return "Basic .gitignore file created";
     }
 }

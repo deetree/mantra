@@ -1,4 +1,4 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

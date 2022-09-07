@@ -1,4 +1,6 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
+
+import com.github.deetree.mantra.Result;
 
 import java.io.IOException;
 import java.nio.file.Files;

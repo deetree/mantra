@@ -37,23 +37,11 @@ class Performer {
             printer.print(Level.SUCCESS, "Resolving paths completed successfully");
 
             try {
-                printer.print(Level.INFO, "Creating directories structure");
-                createStructure(projectPath, javaMainFilesPath, mainResourcesPath,
-                        javaTestFilesPath, testResourcesPath);
-                printer.print(Level.SUCCESS, "Directories structure created successfully");
-                printer.print(Level.INFO, "Creating basic .gitignore file");
-                createGitignore(projectPath);
-                printer.print(Level.SUCCESS, "Basic .gitignore file created");
-                printer.print(Level.INFO, "Creating basic POM file");
-                createPom(projectPath, arguments.groupId, arguments.artifactId,
-                        arguments.mainClass, arguments.javaVersion);
-                printer.print(Level.SUCCESS, "Basic POM file created");
-                printer.print(Level.INFO, "Creating main class");
-                createMain(javaMainFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
-                printer.print(Level.SUCCESS, "Main class created");
-                printer.print(Level.INFO, "Creating test class");
-                createMainTest(javaTestFilesPath, arguments.groupId, arguments.artifactId, arguments.mainClass);
-                printer.print(Level.SUCCESS, "Test class created");
+                printer.print(Level.INFO, "Creating project");
+                createProject(projectPath, javaMainFilesPath, mainResourcesPath,
+                        javaTestFilesPath, testResourcesPath, arguments.groupId,
+                        arguments.artifactId, arguments.mainClass, arguments.javaVersion);
+                printer.print(Level.SUCCESS, "Project created successfully");
                 printer.print(Level.INFO, "Identifying operating system");
                 OS os = new OperatingSystem().identify();
                 printer.print(Level.SUCCESS, "Operating system identified (%s)".formatted(os.name()));
@@ -81,25 +69,11 @@ class Performer {
         return usage.checkHelpRequired() || version.checkHelpRequired();
     }
 
-    private void createStructure(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
-                                 Path javaTestFilesPath, Path testResourcesPath) {
-        Creator.of(projectPath, javaMainFilesPath, mainResourcesPath, javaTestFilesPath, testResourcesPath).create();
-    }
-
-    private void createGitignore(Path projectPath) {
-        new GitignoreCreator(projectPath).create();
-    }
-
-    private void createPom(Path projectPath, String groupId, String artifactId, String mainClass, int javaVersion) {
-        new PomCreator(projectPath, groupId, artifactId, mainClass, String.valueOf(javaVersion)).create();
-    }
-
-    private void createMain(Path mainJavaFilesPath, String groupId, String artifactId, String mainClass) {
-        new MainClassCreator(mainJavaFilesPath, groupId, artifactId, mainClass).create();
-    }
-
-    private void createMainTest(Path testJavaFilesPath, String groupId, String artifactId, String mainClass) {
-        new TestClassCreator(testJavaFilesPath, groupId, artifactId, mainClass).create();
+    private void createProject(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
+                               Path javaTestFilesPath, Path testResourcesPath, String groupId,
+                               String artifactId, String mainClass, int javaVersion) {
+        Creator.of(projectPath, javaMainFilesPath, mainResourcesPath, javaTestFilesPath, testResourcesPath,
+                groupId, artifactId, mainClass, javaVersion).create();
     }
 
     private void initializeGitRepo(Path projectPath, OS os) {

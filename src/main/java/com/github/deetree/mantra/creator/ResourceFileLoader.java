@@ -1,4 +1,4 @@
-package com.github.deetree.mantra;
+package com.github.deetree.mantra.creator;
 
 import java.io.InputStream;
 

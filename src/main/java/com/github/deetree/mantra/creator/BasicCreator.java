@@ -17,16 +17,25 @@ class BasicCreator implements Creator {
     private final Path mainResourcesPath;
     private final Path javaTestFilesPath;
     private final Path testResourcesPath;
+    private final String groupId;
+    private final String artifactId;
+    private final String mainClass;
+    private final int javaVersion;
 
     private final Printer printer = Printer.getDefault();
 
     BasicCreator(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
-                 Path javaTestFilesPath, Path testResourcesPath) {
+                 Path javaTestFilesPath, Path testResourcesPath, String groupId,
+                 String artifactId, String mainClass, int javaVersion) {
         this.projectPath = projectPath;
         this.javaMainFilesPath = javaMainFilesPath;
         this.mainResourcesPath = mainResourcesPath;
         this.javaTestFilesPath = javaTestFilesPath;
         this.testResourcesPath = testResourcesPath;
+        this.groupId = groupId;
+        this.artifactId = artifactId;
+        this.mainClass = mainClass;
+        this.javaVersion = javaVersion;
     }
 
     @Override
@@ -51,7 +60,19 @@ class BasicCreator implements Creator {
         printer.print(Level.SUCCESS, creator.postExecuteStatus());
     }
 
-    private void createBasicFiles() {
+    private void executeCreator(FileCreator creator) {
+        printer.print(Level.INFO, creator.preExecuteStatus());
+        creator.create();
+        printer.print(Level.SUCCESS, creator.postExecuteStatus());
+    }
 
+    private void createBasicFiles() {
+        List<FileCreator> creators = List.of(
+                new GitignoreCreator(projectPath),
+                new PomCreator(projectPath, groupId, artifactId, mainClass, String.valueOf(javaVersion)),
+                new MainClassCreator(javaMainFilesPath, groupId, artifactId, mainClass),
+                new TestClassCreator(javaTestFilesPath, groupId, artifactId, mainClass)
+        );
+        creators.forEach(this::executeCreator);
     }
 }

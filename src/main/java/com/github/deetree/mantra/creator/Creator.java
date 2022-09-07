@@ -13,8 +13,9 @@ public interface Creator {
     Result create();
 
     static Creator of(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
-                      Path javaTestFilesPath, Path testResourcesPath) {
+                      Path javaTestFilesPath, Path testResourcesPath, String groupId,
+                      String artifactId, String mainClass, int javaVersion) {
         return new BasicCreator(projectPath, javaMainFilesPath, mainResourcesPath,
-                javaTestFilesPath, testResourcesPath);
+                javaTestFilesPath, testResourcesPath, groupId, artifactId, mainClass, javaVersion);
     }
 }
