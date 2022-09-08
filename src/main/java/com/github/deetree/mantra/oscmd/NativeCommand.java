@@ -2,6 +2,7 @@ package com.github.deetree.mantra.oscmd;
 
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.Status;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.io.BufferedReader;
@@ -14,13 +15,9 @@ import java.util.List;
 /**
  * @author Mariusz Bal
  */
-interface NativeCommand {
-
-    String preExecuteStatus();
+interface NativeCommand extends Status {
 
     Result execute();
-
-    String postExecuteStatus();
 
     default Result execute(OS os, Path directory, String command) {
         ProcessBuilder processBuilder = new ProcessBuilder();
