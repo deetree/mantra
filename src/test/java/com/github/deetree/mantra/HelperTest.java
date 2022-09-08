@@ -12,9 +12,9 @@ import static org.testng.Assert.assertTrue;
 @Test
 public class HelperTest {
 
-    private ByteArrayOutputStream output;
     private final Helper versionHelper = new VersionHelper(new CLIParser(new String[]{"-V"}).parse().cmd());
     private final Helper usageHelper = new UsageHelper(new CLIParser(new String[]{"-h"}).parse().cmd());
+    private ByteArrayOutputStream output;
 
     @BeforeMethod(onlyForGroups = "output")
     public void setUp() {

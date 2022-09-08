@@ -2,8 +2,6 @@ package com.github.deetree.mantra;
 
 import picocli.CommandLine;
 
-import static picocli.CommandLine.ParseResult;
-
 /**
  * @author Mariusz Bal
  */

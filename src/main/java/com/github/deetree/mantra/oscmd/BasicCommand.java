@@ -1,0 +1,50 @@
+package com.github.deetree.mantra.oscmd;
+
+import com.github.deetree.mantra.OS;
+import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Printer;
+
+import java.nio.file.Path;
+import java.util.stream.Stream;
+
+/**
+ * @author Mariusz Bal
+ */
+class BasicCommand implements Command {
+
+    private final Path projectPath;
+    private final OS os;
+    private final String gitUsername;
+    private final String gitUserEmail;
+    private final Printer printer = Printer.getDefault();
+
+    BasicCommand(Path projectPath, OS os, String gitUsername, String gitUserEmail) {
+        this.projectPath = projectPath;
+        this.os = os;
+        this.gitUsername = gitUsername;
+        this.gitUserEmail = gitUserEmail;
+    }
+
+    @Override
+    public Result executeGit() {
+        Stream.of(
+                new InitializeGitCommand(os, projectPath),
+                new LocalGitUserConfigCommand(os, projectPath, gitUsername, gitUserEmail),
+                new CreateInitCommitCommand(os, projectPath)
+        ).forEach(this::executeCommand);
+        return Result.OK;
+    }
+
+    @Override
+    public Result openIntelliJ() {
+        executeCommand(new OpenIntelliJCommand(os, projectPath));
+        return Result.OK;
+    }
+
+    private void executeCommand(NativeCommand command) {
+        printer.print(Level.INFO, command.preExecuteStatus());
+        command.execute();
+        printer.print(Level.SUCCESS, command.postExecuteStatus());
+    }
+}

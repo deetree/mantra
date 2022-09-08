@@ -3,9 +3,9 @@ package com.github.deetree.mantra;
 /**
  * @author Mariusz Bal
  */
-class OperatingSystem {
+public class OperatingSystem {
 
-    OS identify() {
+    public OS identify() {
         String os = System.getProperty("os.name").toLowerCase();
         if (os.contains("windows"))
             return OS.WINDOWS;

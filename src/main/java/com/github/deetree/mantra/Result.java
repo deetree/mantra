@@ -3,7 +3,7 @@ package com.github.deetree.mantra;
 /**
  * @author Mariusz Bal
  */
-enum Result {
+public enum Result {
     OK,
     ERROR
 }
