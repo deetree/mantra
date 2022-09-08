@@ -34,8 +34,7 @@ class PomCreator implements FileCreator {
     @Override
     public Result create() {
         final String fileName = "pom.xml";
-        InputStream pom = ResourceFileLoader.load(fileName);
-        try {
+        try (InputStream pom = ResourceFileLoader.load(fileName)) {
             new FileWriter(projectPath.resolve(fileName),
                     replaceVariables(new String(pom.readAllBytes()))).write();
             return Result.OK;

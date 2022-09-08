@@ -31,8 +31,7 @@ class TestClassCreator implements FileCreator {
 
     @Override
     public Result create() {
-        InputStream pom = ResourceFileLoader.load("MainTest.java");//todo check
-        try {
+        try (InputStream pom = ResourceFileLoader.load("MainTest.java")) {
             new FileWriter(testJavaFilesPath.resolve(mainClass + "Test.java"),
                     replaceVariables(new String(pom.readAllBytes()))).write();
             return Result.OK;

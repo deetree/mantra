@@ -31,8 +31,7 @@ class MainClassCreator implements FileCreator {
 
     @Override
     public Result create() {
-        InputStream pom = ResourceFileLoader.load("Main.java");
-        try {
+        try (InputStream pom = ResourceFileLoader.load("Main.java")) {
             new FileWriter(mainJavaFilesPath.resolve(mainClass + ".java"),
                     replaceVariables(new String(pom.readAllBytes()))).write();
             return Result.OK;

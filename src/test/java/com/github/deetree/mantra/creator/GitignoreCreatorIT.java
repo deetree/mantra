@@ -14,7 +14,7 @@ public class GitignoreCreatorIT {
         //g
         Path directory = Path.of(System.getProperty("user.home"));
         Path gitignore = directory.resolve(".gitignore");
-        FileCreator creator = new GitignoreCreator(directory);
+        Creator creator = new GitignoreCreator(directory);
         //w
         creator.create();
         //t
