@@ -1,6 +1,7 @@
 package com.github.deetree.mantra.creator;
 
 import com.github.deetree.mantra.ActionException;
+import com.github.deetree.mantra.Result;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,11 +24,12 @@ class GitignoreCreator implements FileCreator {
     }
 
     @Override
-    public void create() {
+    public Result create() {
         final String fileName = "gitignore";
         InputStream gitignore = ResourceFileLoader.load(fileName);
         try {
             Files.copy(gitignore, projectPath.resolve("." + fileName), StandardCopyOption.REPLACE_EXISTING);
+            return Result.OK;
         } catch (IOException e) {
             throw new ActionException("An error occurred during .gitignore file creation");
         }

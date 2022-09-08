@@ -1,6 +1,7 @@
 package com.github.deetree.mantra.creator;
 
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.Status;
 import com.github.deetree.mantra.printer.Level;
 import com.github.deetree.mantra.printer.Printer;
 
@@ -21,7 +22,6 @@ class BasicCreator implements Creator {
     private final String artifactId;
     private final String mainClass;
     private final int javaVersion;
-
     private final Printer printer = Printer.getDefault();
 
     BasicCreator(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
@@ -42,7 +42,7 @@ class BasicCreator implements Creator {
     public Result create() {
         createDirectoryStructure();
         createBasicFiles();
-        return Result.OK;//todo check
+        return Result.OK;
     }
 
     private void createDirectoryStructure() {
@@ -53,18 +53,6 @@ class BasicCreator implements Creator {
         ).forEach(this::executeCreator);
     }
 
-    private void executeCreator(DirectoryCreator creator) {
-        printer.print(Level.INFO, creator.preExecuteStatus());
-        creator.create();
-        printer.print(Level.SUCCESS, creator.postExecuteStatus());
-    }
-
-    private void executeCreator(FileCreator creator) {
-        printer.print(Level.INFO, creator.preExecuteStatus());
-        creator.create();
-        printer.print(Level.SUCCESS, creator.postExecuteStatus());
-    }
-
     private void createBasicFiles() {
         Stream.of(
                 new GitignoreCreator(projectPath),
@@ -72,5 +60,12 @@ class BasicCreator implements Creator {
                 new MainClassCreator(javaMainFilesPath, groupId, artifactId, mainClass),
                 new TestClassCreator(javaTestFilesPath, groupId, artifactId, mainClass)
         ).forEach(this::executeCreator);
+    }
+
+    private void executeCreator(Creator creator) {
+        Status status = (Status) creator;
+        printer.print(Level.INFO, status.preExecuteStatus());
+        creator.create();
+        printer.print(Level.SUCCESS, status.postExecuteStatus());
     }
 }

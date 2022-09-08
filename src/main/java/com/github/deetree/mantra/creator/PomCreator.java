@@ -1,6 +1,7 @@
 package com.github.deetree.mantra.creator;
 
 import com.github.deetree.mantra.ActionException;
+import com.github.deetree.mantra.Result;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,12 +32,13 @@ class PomCreator implements FileCreator {
     }
 
     @Override
-    public void create() {
+    public Result create() {
         final String fileName = "pom.xml";
         InputStream pom = ResourceFileLoader.load(fileName);
         try {
             new FileWriter(projectPath.resolve(fileName),
                     replaceVariables(new String(pom.readAllBytes()))).write();
+            return Result.OK;
         } catch (IOException e) {
             throw new ActionException("An error occurred during POM file creation");
         }
