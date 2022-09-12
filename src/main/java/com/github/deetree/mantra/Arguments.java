@@ -1,5 +1,6 @@
 package com.github.deetree.mantra;
 
+import com.github.deetree.mantra.config.ConfigValues;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -43,5 +44,29 @@ class Arguments implements Runnable {
     public void run() {
         if (artifactId == null)
             artifactId = name;
+    }
+
+    void updateWithConfig(ConfigValues configValues) {
+        directory = configValues.directory();
+        groupId = configValues.group();
+        artifactId = configValues.artifact();
+        mainClass = configValues.main();
+        gitUsername = configValues.username();
+        gitEmail = configValues.email();
+    }
+
+    @Override
+    public String toString() {
+        return "Arguments{" +
+                "name='" + name + '\'' +
+                ", directory='" + directory + '\'' +
+                ", groupId='" + groupId + '\'' +
+                ", artifactId='" + artifactId + '\'' +
+                ", mainClass='" + mainClass + '\'' +
+                ", javaVersion=" + javaVersion +
+                ", disableGit=" + disableGit +
+                ", gitUsername='" + gitUsername + '\'' +
+                ", gitEmail='" + gitEmail + '\'' +
+                '}';
     }
 }
