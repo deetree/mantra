@@ -10,19 +10,22 @@
 
     <properties>
         <java.version>17</java.version>
+        <maven.min.version>3.8.5</maven.min.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.project.build.encoding>UTF-8</project.project.build.encoding>
         <project.build.sourceEncoding>${project.project.build.encoding}</project.build.sourceEncoding>
         <project.build.targetEncoding>${project.project.build.encoding}</project.build.targetEncoding>
+        <testng.version>7.6.1</testng.version>
+        <picocli.version>4.6.3</picocli.version>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.jar.plugin.version>3.2.2</maven.jar.plugin.version>
         <maven.dependency.plugin.version>3.2.0</maven.dependency.plugin.version>
-        <maven.assembly.plugin.version>3.3.0</maven.assembly.plugin.version>
-        <testng.version>7.6.0</testng.version>
-        <picocli.version>4.6.3</picocli.version>
+        <maven.assembly.plugin.version>3.4.1</maven.assembly.plugin.version>
         <maven.failsafe.plugin.version>3.0.0-M7</maven.failsafe.plugin.version>
-        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <maven.resources.plugin.version>3.2.0</maven.resources.plugin.version>
+        <maven.enforcer.plugin.version>3.1.0</maven.enforcer.plugin.version>
     </properties>
 
     <dependencies>
@@ -102,6 +105,32 @@
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven.enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${maven.min.version}</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                                <requireReleaseVersion>
+                                    <message>No Snapshots Allowed!</message>
+                                </requireReleaseVersion>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
