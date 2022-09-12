@@ -10,7 +10,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <maven.min.version>3.8.6</maven.min.version>
+        <maven.min.version>3.8.5</maven.min.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.project.build.encoding>UTF-8</project.project.build.encoding>
