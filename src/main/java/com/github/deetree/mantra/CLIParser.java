@@ -15,11 +15,11 @@ class CLIParser {
         this.arguments = arguments;
     }
 
-    Trio parse() {
+    CommandLine parse() {
         CommandLine cmd = new CommandLine(arguments);
         cmd.setOverwrittenOptionsAllowed(true);
         cmd.setUnmatchedArgumentsAllowed(true);
         cmd.execute(args);
-        return new Trio(cmd, null, arguments);
+        return cmd;
     }
 }

@@ -13,9 +13,9 @@ import static org.testng.Assert.assertTrue;
 public class HelperTest {
 
     private final Helper versionHelper = new VersionHelper(new CLIParser(new String[]{"-V"},
-            new Arguments()).parse().cmd());
+            new Arguments()).parse());
     private final Helper usageHelper = new UsageHelper(new CLIParser(new String[]{"-h"},
-            new Arguments()).parse().cmd());
+            new Arguments()).parse());
     private ByteArrayOutputStream output;
 
     @BeforeMethod(onlyForGroups = "output")
