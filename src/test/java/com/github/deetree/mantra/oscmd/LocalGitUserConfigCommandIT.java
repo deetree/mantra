@@ -26,7 +26,7 @@ public class LocalGitUserConfigCommandIT {
 
     @BeforeMethod
     private void setUp() throws IOException {
-        dirPath = Files.createTempDirectory(Path.of(System.getProperty("user.home")), "tempGitTest");
+        dirPath = Files.createTempDirectory(Path.of(System.getProperty("user.home")), "gitTempConfig");
         gitPath = dirPath.resolve(".git");
         new InitializeGitCommand(os, dirPath).execute();
     }

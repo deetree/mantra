@@ -16,7 +16,7 @@ public class InitializeGitCommandIT {
 
     public void shouldInitializeGitRepository() throws IOException {
         //g
-        Path dirPath = Files.createTempDirectory(Path.of(System.getProperty("user.home")), "gitInitTest");
+        Path dirPath = Files.createTempDirectory(Path.of(System.getProperty("user.home")), "gitTempInit");
         Path gitPath = dirPath.resolve(".git");
         //w
         Result result = new InitializeGitCommand(new OperatingSystem().identify(), dirPath).execute();
