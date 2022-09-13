@@ -40,9 +40,7 @@ class Main {
             printer.print(WARNING, e.getMessage());
         }
 
-        Trio parsingResult = new CLIParser(args, arguments).parse();
-        CommandLine cmd = parsingResult.cmd();
-        arguments = parsingResult.arguments();
+        CommandLine cmd = new CLIParser(args, arguments).parse();
 
         Helper usage = new UsageHelper(cmd);
         Helper version = new VersionHelper(cmd);
