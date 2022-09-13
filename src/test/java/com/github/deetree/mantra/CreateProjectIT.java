@@ -1,12 +1,13 @@
 package com.github.deetree.mantra;
 
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 
 @Test
@@ -14,6 +15,14 @@ public class CreateProjectIT {
 
     private final Path homePath = Path.of(System.getProperty("user.home"));
     private final String projectName = "testProject";
+    private final Path configFilePath = homePath.resolve(".mantra.config");
+    private final Path configFileBackupPath = homePath.resolve(".mantra.config.backup");
+
+    @BeforeClass
+    private void backupConfig() throws IOException {
+        if (new File(configFilePath.toUri()).exists())
+            Files.move(configFilePath, configFileBackupPath);
+    }
 
     public void shouldUseProjectNameIfNoArtifactProvided() throws IOException {
         //g
@@ -44,5 +53,16 @@ public class CreateProjectIT {
                 .sorted(Comparator.reverseOrder())
                 .map(Path::toFile)
                 .forEach(File::delete);
+    }
+
+    @AfterMethod
+    private void deleteTempConfig() throws IOException {
+        Files.delete(configFilePath);
+    }
+
+    @AfterClass
+    private void restoreConfig() throws IOException {
+        if (new File(configFileBackupPath.toUri()).exists())
+            Files.move(configFileBackupPath, configFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 }
