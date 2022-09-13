@@ -1,9 +1,7 @@
 package com.github.deetree.mantra;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +20,8 @@ public class CreateProjectIT {
 
     @BeforeClass
     private void backupConfig() throws IOException {
-        Files.move(configFilePath, configFileBackupPath);
+        if (new File(configFilePath.toUri()).exists())
+            Files.move(configFilePath, configFileBackupPath);
     }
 
     public void shouldUseProjectNameIfNoArtifactProvided() throws IOException {
@@ -56,8 +55,14 @@ public class CreateProjectIT {
                 .forEach(File::delete);
     }
 
+    @AfterMethod
+    private void deleteTempConfig() throws IOException {
+        Files.delete(configFilePath);
+    }
+
     @AfterClass
     private void restoreConfig() throws IOException {
-        Files.move(configFileBackupPath, configFilePath, StandardCopyOption.REPLACE_EXISTING);
+        if (new File(configFileBackupPath.toUri()).exists())
+            Files.move(configFileBackupPath, configFilePath, StandardCopyOption.REPLACE_EXISTING);
     }
 }
