@@ -54,19 +54,4 @@ class Arguments implements Runnable {
         gitUsername = configValues.username();
         gitEmail = configValues.email();
     }
-
-    @Override
-    public String toString() {
-        return "Arguments{" +
-                "name='" + name + '\'' +
-                ", directory='" + directory + '\'' +
-                ", groupId='" + groupId + '\'' +
-                ", artifactId='" + artifactId + '\'' +
-                ", mainClass='" + mainClass + '\'' +
-                ", javaVersion=" + javaVersion +
-                ", disableGit=" + disableGit +
-                ", gitUsername='" + gitUsername + '\'' +
-                ", gitEmail='" + gitEmail + '\'' +
-                '}';
-    }
 }

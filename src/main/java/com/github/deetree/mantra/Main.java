@@ -41,16 +41,13 @@ class Main {
         }
 
         Trio parsingResult = new CLIParser(args, arguments).parse();
-
         CommandLine cmd = parsingResult.cmd();
         arguments = parsingResult.arguments();
 
-        System.out.println(arguments);
-
         Helper usage = new UsageHelper(cmd);
         Helper version = new VersionHelper(cmd);
-        if (false) {
-            //if (!wasHelpUsed(usage, version) && arguments.name != null) {
+
+        if (!wasHelpUsed(usage, version) && arguments.name != null) {
             printer.print(INFO, "Resolving paths");
             ResolvedPaths paths = new PathResolver(arguments.directory, arguments.name,
                     arguments.groupId, arguments.artifactId).resolvePaths();
