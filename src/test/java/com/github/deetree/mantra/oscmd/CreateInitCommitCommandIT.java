@@ -16,7 +16,7 @@ public class CreateInitCommitCommandIT {
 
     public void shouldCreateCommit() throws IOException {
         //g
-        Path dirPath = Files.createTempDirectory(Path.of(System.getProperty("user.home")), "gitTempCommit");
+        Path dirPath = Files.createTempDirectory("gitTempCommit");
         Path gitRefsHeadsPath = dirPath.resolve(Path.of(".git", "refs", "heads"));
         Files.createFile(dirPath.resolve("sampleFile"));
         OS os = new OperatingSystem().identify();

@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 @Test
 public class PathResolverTest {
 
-    private final String directory = System.getProperty("user.home");
+    private final String directory = System.getProperty("java.io.tmpdir");
     private final String projectName = "exampleProject";
     private final String src = "src";
     private final String group = "com.xyz.abc.def";
