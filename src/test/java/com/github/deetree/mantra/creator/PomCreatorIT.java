@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 @Test
 public class PomCreatorIT {
 
-    private final Path path = Path.of(System.getProperty("user.home"));
+    private final Path path = Path.of(System.getProperty("java.io.tmpdir"));
     private final Path pomPath = path.resolve("pom.xml");
     private final String group = "testGroup";
     private final String artifact = "testArtifact";

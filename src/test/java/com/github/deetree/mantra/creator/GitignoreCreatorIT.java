@@ -12,7 +12,7 @@ public class GitignoreCreatorIT {
 
     public void shouldCopyGitignoreToDirectory() throws IOException {
         //g
-        Path directory = Path.of(System.getProperty("user.home"));
+        Path directory = Path.of(System.getProperty("java.io.tmpdir"));
         Path gitignore = directory.resolve(".gitignore");
         Creator creator = new GitignoreCreator(directory);
         //w

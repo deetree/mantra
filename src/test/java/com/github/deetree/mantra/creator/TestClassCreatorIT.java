@@ -12,7 +12,7 @@ public class TestClassCreatorIT {
 
     public void shouldContainSubstitutedValues() throws IOException {
         //g
-        Path path = Path.of(System.getProperty("user.home"));
+        Path path = Path.of(System.getProperty("java.io.tmpdir"));
         String group = "testGroup";
         String artifact = "testArtifact";
         String main = "MainClass";
