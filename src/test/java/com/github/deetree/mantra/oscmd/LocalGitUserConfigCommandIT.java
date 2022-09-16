@@ -2,17 +2,16 @@ package com.github.deetree.mantra.oscmd;
 
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.OperatingSystem;
+import com.github.deetree.mantra.Remover;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.stream.Stream;
 
 import static org.testng.Assert.assertTrue;
@@ -33,10 +32,7 @@ public class LocalGitUserConfigCommandIT {
 
     @AfterMethod
     private void cleanUp() throws IOException {
-        Files.walk(dirPath)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
+        Remover.deleteDirectory(dirPath);
     }
 
     @DataProvider

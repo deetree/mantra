@@ -2,14 +2,13 @@ package com.github.deetree.mantra.oscmd;
 
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.OperatingSystem;
+import com.github.deetree.mantra.Remover;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
 
 @Test
 public class CreateInitCommitCommandIT {
@@ -31,10 +30,7 @@ public class CreateInitCommitCommandIT {
         sa.assertTrue(Files.list(gitRefsHeadsPath).findAny().isPresent(), "The first commit should be created");
         sa.assertAll();
 
-        Files.walk(dirPath)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
+        Remover.deleteDirectory(dirPath);
     }
 
 }
