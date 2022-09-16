@@ -1,15 +1,14 @@
 package com.github.deetree.mantra.oscmd;
 
 import com.github.deetree.mantra.OperatingSystem;
+import com.github.deetree.mantra.Remover;
 import com.github.deetree.mantra.Result;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
 
 @Test
 public class InitializeGitCommandIT {
@@ -29,9 +28,6 @@ public class InitializeGitCommandIT {
                 "The .git directory should not be empty");
         sa.assertAll();
 
-        Files.walk(dirPath)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
+        Remover.deleteDirectory(dirPath);
     }
 }

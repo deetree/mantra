@@ -1,14 +1,16 @@
 package com.github.deetree.mantra;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
 
 @Test
 public class CreateProjectIT {
@@ -49,10 +51,7 @@ public class CreateProjectIT {
     }
 
     private void removeDirectory(Path path) throws IOException {
-        Files.walk(path)
-                .sorted(Comparator.reverseOrder())
-                .map(Path::toFile)
-                .forEach(File::delete);
+        Remover.deleteDirectory(path);
     }
 
     @AfterMethod
