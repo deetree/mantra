@@ -1,5 +1,6 @@
 package com.github.deetree.mantra.config;
 
+import com.github.deetree.mantra.Reader;
 import com.github.deetree.mantra.Result;
 
 import java.io.File;
@@ -26,9 +27,17 @@ public class Config implements Configuration {
 
     @Override
     public Result createConfigFile() {
-        if (!configExists())
-            return new ConfigWriter(configFile).createBasicConfig();
+        if (!configExists()) {
+            Properties properties = new Properties();
+            properties.setProperty(PropertyName.LAUNCHER.toString(), "");
+            return new ConfigWriter(configFile).createConfig(properties);
+        }
         return Result.ERROR;
+    }
+
+    @Override
+    public Result configureDefaults() {
+        return new InteractiveConfiguration(Reader.getDefault(), configFile).configure();
     }
 
     private boolean configExists() {

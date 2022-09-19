@@ -40,6 +40,9 @@ class Arguments implements Runnable {
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
 
+    @Option(names = {"--configure", "-c"}, description = "Create global defaults config file")
+    boolean configure;
+
     @Override
     public void run() {
         if (artifactId == null)

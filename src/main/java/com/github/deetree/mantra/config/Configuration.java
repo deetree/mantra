@@ -9,4 +9,6 @@ public interface Configuration {
     ConfigValues load();
 
     Result createConfigFile();
+
+    Result configureDefaults();
 }

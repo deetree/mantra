@@ -3,7 +3,7 @@ package com.github.deetree.mantra.config;
 /**
  * @author Mariusz Bal
  */
-enum PropertyNames {
+enum PropertyName {
     DIRECTORY("directory"),
     GROUP("groupId"),
     ARTIFACT("artifactId"),
@@ -14,7 +14,7 @@ enum PropertyNames {
 
     private final String name;
 
-    PropertyNames(String name) {
+    PropertyName(String name) {
         this.name = name;
     }
 
