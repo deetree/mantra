@@ -2,7 +2,7 @@ package com.github.deetree.mantra.config;
 
 import java.util.Properties;
 
-import static com.github.deetree.mantra.config.PropertyNames.*;
+import static com.github.deetree.mantra.config.PropertyName.*;
 
 /**
  * @author Mariusz Bal

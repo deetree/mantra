@@ -31,9 +31,9 @@ class Main {
 
         try {
             if (configuration.createConfigFile() == Result.OK)
-                printer.print(INFO, "Config file has been created");
+                printer.print(SUCCESS, "Basic config file has been created");
             else
-                printer.print(INFO, "Config file has been found. Creating new one is being skipped.");
+                printer.print(INFO, "Config file has been found");
             configValues = configuration.load();
             arguments.updateWithConfig(configValues);
         } catch (ActionException e) {
@@ -45,33 +45,43 @@ class Main {
         Helper usage = new UsageHelper(cmd);
         Helper version = new VersionHelper(cmd);
 
-        if (!wasHelpUsed(usage, version) && arguments.name != null) {
-            printer.print(INFO, "Resolving paths");
-            ResolvedPaths paths = new PathResolver(arguments.directory, arguments.name,
-                    arguments.groupId, arguments.artifactId).resolvePaths();
-            printer.print(SUCCESS, "Resolving paths completed successfully");
+        if (!wasHelpUsed(usage, version)) {
+            if (arguments.configure) {
+                try {
+                    if (configuration.configureDefaults() == Result.OK) {
+                        printer.print(SUCCESS, "Config file with defaults has been created");
+                    } else {printer.print(WARNING, "Something went wrong during default configuration creating");}
+                } catch (ActionException e) {
+                    printer.print(WARNING, e.getMessage());
+                }
+            } else if (arguments.name != null) {
+                printer.print(INFO, "Resolving paths");
+                ResolvedPaths paths = new PathResolver(arguments.directory, arguments.name,
+                        arguments.groupId, arguments.artifactId).resolvePaths();
+                printer.print(SUCCESS, "Resolving paths completed successfully");
 
-            try {
-                printer.print(INFO, "Creating project");
-                Creator.of(paths.projectPath(), paths.javaMainFilesPath(), paths.mainResourcesPath(),
-                        paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
-                        arguments.artifactId, arguments.mainClass, arguments.javaVersion).create();
-                printer.print(SUCCESS, "Project created successfully");
-                printer.print(INFO, "Identifying operating system");
-                OS os = new OperatingSystem().identify();
-                printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
-                Command command = Command.getDefault(paths.projectPath(), os,
-                        arguments.gitUsername, arguments.gitEmail);
-                if (!arguments.disableGit)
-                    command.executeGit();
-                command.openIntelliJ();
-            } catch (ActionException | OSNotSupportedException e) {
-                printer.print(ERROR, e.getMessage());
+                try {
+                    printer.print(INFO, "Creating project");
+                    Creator.of(paths.projectPath(), paths.javaMainFilesPath(), paths.mainResourcesPath(),
+                            paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
+                            arguments.artifactId, arguments.mainClass, arguments.javaVersion).create();
+                    printer.print(SUCCESS, "Project created successfully");
+                    printer.print(INFO, "Identifying operating system");
+                    OS os = new OperatingSystem().identify();
+                    printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
+                    Command command = Command.getDefault(paths.projectPath(), os,
+                            arguments.gitUsername, arguments.gitEmail);
+                    if (!arguments.disableGit)
+                        command.executeGit();
+                    command.openIntelliJ();
+                } catch (ActionException | OSNotSupportedException e) {
+                    printer.print(ERROR, e.getMessage());
+                }
             }
         }
     }
 
     private static boolean wasHelpUsed(Helper helper1, Helper helper2) {
-        return Stream.of(helper1, helper2).allMatch(Helper::checkHelpRequired);
+        return Stream.of(helper1, helper2).anyMatch(Helper::checkHelpRequired);
     }
 }

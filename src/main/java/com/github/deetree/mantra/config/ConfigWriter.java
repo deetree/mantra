@@ -17,9 +17,14 @@ class ConfigWriter {
         this.configFile = configFile;
     }
 
-    Result createBasicConfig() {
-        Properties properties = new Properties();
-        properties.setProperty(PropertyNames.LAUNCHER.toString(), "");
+    Result createConfig(Properties properties) {
+        Result result = applyProperties(properties);
+        if (properties.isEmpty())
+            throw new ActionException("No config defaults have been provided");
+        return result;
+    }
+
+    private Result applyProperties(Properties properties) {
         try {
             OutputStream outputStream = new FileOutputStream(configFile);
             properties.store(outputStream, "Mantra global configuration");
