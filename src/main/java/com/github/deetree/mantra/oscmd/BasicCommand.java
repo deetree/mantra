@@ -43,9 +43,15 @@ class BasicCommand implements Command {
         return Result.OK;
     }
 
+    @Override
+    public Result locateIntelliJ(Path launcherPathFile) {
+        executeCommand(new LocateIntelliJCommand(os, launcherPathFile));
+        return Result.OK;
+    }
+
     private void executeCommand(NativeCommand command) {
         printer.print(Level.INFO, command.preExecuteStatus());
-        command.execute();
-        printer.print(Level.SUCCESS, command.postExecuteStatus());
+        if (command.execute() == Result.OK)
+            printer.print(Level.SUCCESS, command.postExecuteStatus());
     }
 }

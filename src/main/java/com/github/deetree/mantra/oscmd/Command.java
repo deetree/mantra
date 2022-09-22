@@ -19,4 +19,6 @@ public interface Command {
 
     Result openIntelliJ();
 
+    Result locateIntelliJ(Path launcherPathFile);
+
 }

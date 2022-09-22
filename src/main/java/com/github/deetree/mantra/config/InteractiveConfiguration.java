@@ -19,11 +19,12 @@ class InteractiveConfiguration {
     private final Reader reader;
     private final File configFile;
     private final Printer printer;
-    private final Properties properties = new Properties();
+    private final Properties properties;
 
-    InteractiveConfiguration(Reader reader, File configFile, Printer printer) {
+    InteractiveConfiguration(Reader reader, File configFile, Properties properties, Printer printer) {
         this.reader = reader;
         this.configFile = configFile;
+        this.properties = properties;
         this.printer = printer;
     }
 
