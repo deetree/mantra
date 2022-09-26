@@ -1,9 +1,13 @@
 package com.github.deetree.mantra;
 
 import com.github.deetree.mantra.config.ConfigValues;
+import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+
+import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author Mariusz Bal
@@ -40,7 +44,8 @@ class Arguments implements Runnable {
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
 
-    @Option(names = {"--configure", "-c"}, description = "Create global defaults config file")
+    @Option(names = {"--configure", "-c"}, description = "Create global defaults config file",
+            preprocessor = ConfigFlagPreprocessor.class)
     boolean configure;
 
     @Override
@@ -56,5 +61,14 @@ class Arguments implements Runnable {
         mainClass = configValues.main();
         gitUsername = configValues.username();
         gitEmail = configValues.email();
+    }
+
+    static class ConfigFlagPreprocessor implements CommandLine.IParameterPreprocessor {
+        @Override
+        public boolean preprocess(Stack<String> args, CommandLine.Model.CommandSpec commandSpec,
+                                  CommandLine.Model.ArgSpec argSpec, Map<String, Object> info) {
+            args.push("configModeHelpNotNeeded");
+            return false;
+        }
     }
 }
