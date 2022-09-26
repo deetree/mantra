@@ -6,7 +6,6 @@ import com.github.deetree.mantra.oscmd.Command;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mariusz Bal
@@ -21,7 +20,7 @@ class IdeLauncherAutoSave {
 
     String findPath() {
         try {
-            Path launcherPathFile = Path.of(System.getProperty("java.io.tmpdir"), "idea.path");
+            Path launcherPathFile = Files.createTempFile("idea_launcher", ".path");
             Command.getDefault(Path.of(""), os, "", "").locateIntelliJ(launcherPathFile);
             return Files.readString(launcherPathFile).strip();
         } catch (IOException e) {

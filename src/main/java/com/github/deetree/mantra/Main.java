@@ -23,8 +23,14 @@ class Main {
         Printer printer = Printer.getDefault();
 
         printer.print(INFO, "Identifying operating system");
-        OS os = new OperatingSystem().identify();
-        printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
+        OS os;
+        try {
+            os = new OperatingSystem().identify();
+            printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
+        } catch (OSNotSupportedException e) {
+            printer.print(ERROR, e.getMessage());
+            return;//todo exit app
+        }
 
         File configFile = new File(System.getProperty("user.home"), ".mantra.config");
         Arguments arguments = new Arguments();
@@ -76,7 +82,7 @@ class Main {
                     if (!arguments.disableGit)
                         command.executeGit();
                     command.openIntelliJ();
-                } catch (ActionException | OSNotSupportedException e) {
+                } catch (ActionException e) {
                     printer.print(ERROR, e.getMessage());
                 }
             }
