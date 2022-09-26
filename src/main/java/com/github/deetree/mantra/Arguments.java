@@ -13,8 +13,8 @@ import java.util.Stack;
  * @author Mariusz Bal
  */
 @Command(name = "mantra", description = "Kickstart your Java (Maven) project",
-        showDefaultValues = true, abbreviateSynopsis = true, version = "Mantra version %s",
-        mixinStandardHelpOptions = true)
+        showDefaultValues = true, abbreviateSynopsis = true,
+        mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 class Arguments implements Runnable {
 
     @Parameters(description = "Project's name")

@@ -15,14 +15,6 @@ class UsageHelper implements Helper {
 
     @Override
     public boolean checkHelpRequired() {
-        boolean usageHelpRequested = cmd.isUsageHelpRequested();
-        if (usageHelpRequested)
-            printHelp();
-        return usageHelpRequested;
-    }
-
-    @Override
-    public void printHelp() {
-        cmd.usage(System.out);
+        return cmd.isUsageHelpRequested();
     }
 }

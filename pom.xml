@@ -74,6 +74,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <mainClass>com.github.deetree.mantra.Main</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
                     <appendAssemblyId>false</appendAssemblyId>
