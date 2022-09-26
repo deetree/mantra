@@ -25,7 +25,7 @@ class TestClassCreator implements FileCreator {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating test class";
     }
 
@@ -41,8 +41,13 @@ class TestClassCreator implements FileCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
-        return "Test class created";
+    public String makePostExecuteSuccessStatus() {
+        return "Test class file created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create test class file";
     }
 
     private String replaceVariables(String pom) {

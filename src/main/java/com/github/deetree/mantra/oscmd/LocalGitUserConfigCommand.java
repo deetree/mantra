@@ -27,7 +27,7 @@ class LocalGitUserConfigCommand implements NativeCommand {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Configuring git repository";
     }
 
@@ -41,8 +41,13 @@ class LocalGitUserConfigCommand implements NativeCommand {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Git repository configured";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not configure git repository user info";
     }
 
     private boolean isValid(CharSequence element) {
