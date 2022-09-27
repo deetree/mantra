@@ -49,12 +49,12 @@ public class Config implements Configuration {
         Thread launcherFindThread = createLauncherFindingThread(properties);
         launcherFindThread.setDaemon(true);
         launcherFindThread.start();
-        return new InteractiveConfiguration(Reader.getDefault(), configFile, properties).configure();
+        return new InteractiveConfiguration(Reader.getDefault(), configFile, properties, printer).configure();
     }
 
     private Thread createLauncherFindingThread(Properties properties) {
         return new Thread(() -> {
-            String launcherPath = new IdeLauncherAutoSave(os).findPath();
+            String launcherPath = new IdeLauncherAutoSave(os, printer).findPath();
             properties.setProperty(LAUNCHER.toString(), properties.getProperty(LAUNCHER.toString(), launcherPath));
         }, "launcher-find-thread");
     }

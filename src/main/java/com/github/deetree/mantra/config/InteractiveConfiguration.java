@@ -37,7 +37,9 @@ class InteractiveConfiguration {
 
     private void promptForProperty(PropertyName name) {
         printer.print(INFO, name.toString() + ":");
+        printer.suspendPrinting();
         saveProperty(name, reader.readLine());
+        printer.resumePrinting();
     }
 
     private boolean isEmpty(String input) {

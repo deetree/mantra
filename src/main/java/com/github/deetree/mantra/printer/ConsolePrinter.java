@@ -1,17 +1,15 @@
 package com.github.deetree.mantra.printer;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Queue;
 
 /**
  * @author Mariusz Bal
  */
 class ConsolePrinter implements Printer {
 
-    private boolean printingSuspended;
     private final Collection<String> suspendedMessages = new ArrayList<>();
+    private boolean printingSuspended;
 
     @Override
     public void print(Level level, String text) {

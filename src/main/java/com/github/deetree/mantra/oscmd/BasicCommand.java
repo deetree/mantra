@@ -45,7 +45,7 @@ class BasicCommand implements Command {
 
     @Override
     public Result locateIntelliJ(Path launcherPathFile) {
-        executeCommand(new LocateIntelliJCommand(os, launcherPathFile));
+        executeCommand(new LocateIntelliJCommand(os, launcherPathFile, printer));
         return Result.OK;
     }
 
