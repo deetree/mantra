@@ -3,6 +3,7 @@ package com.github.deetree.mantra.oscmd;
 import com.github.deetree.mantra.ActionException;
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
 
@@ -13,10 +14,12 @@ class InitializeGitCommand implements NativeCommand {
 
     private final OS os;
     private final Path projectPath;
+    private final Printer printer;
 
-    InitializeGitCommand(OS os, Path projectPath) {
+    InitializeGitCommand(OS os, Path projectPath, Printer printer) {
         this.os = os;
         this.projectPath = projectPath;
+        this.printer = printer;
     }
 
     @Override
@@ -26,7 +29,7 @@ class InitializeGitCommand implements NativeCommand {
 
     @Override
     public Result execute() {
-        if (execute(os, projectPath, "git init") != Result.OK)
+        if (execute(os, projectPath, "git init", printer) != Result.OK)
             throw new ActionException("An exception occurred during git repository initialization");
         return Result.OK;
     }

@@ -22,11 +22,11 @@ class BasicCreator implements Creator {
     private final String artifactId;
     private final String mainClass;
     private final int javaVersion;
-    private final Printer printer = Printer.getDefault();
+    private final Printer printer;
 
     BasicCreator(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
                  Path javaTestFilesPath, Path testResourcesPath, String groupId,
-                 String artifactId, String mainClass, int javaVersion) {
+                 String artifactId, String mainClass, int javaVersion, Printer printer) {
         this.projectPath = projectPath;
         this.javaMainFilesPath = javaMainFilesPath;
         this.mainResourcesPath = mainResourcesPath;
@@ -36,6 +36,7 @@ class BasicCreator implements Creator {
         this.artifactId = artifactId;
         this.mainClass = mainClass;
         this.javaVersion = javaVersion;
+        this.printer = printer;
     }
 
     @Override

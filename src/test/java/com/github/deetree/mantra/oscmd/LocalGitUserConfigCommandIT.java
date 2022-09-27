@@ -3,6 +3,7 @@ package com.github.deetree.mantra.oscmd;
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.OperatingSystem;
 import com.github.deetree.mantra.Remover;
+import com.github.deetree.mantra.printer.Printer;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -20,6 +21,7 @@ import static org.testng.Assert.assertTrue;
 public class LocalGitUserConfigCommandIT {
 
     private final OS os = new OperatingSystem().identify();
+    private final Printer printer = Printer.getDefault();
     private Path dirPath;
     private Path gitPath;
 
@@ -27,7 +29,7 @@ public class LocalGitUserConfigCommandIT {
     private void setUp() throws IOException {
         dirPath = Files.createTempDirectory("gitTempConfig");
         gitPath = dirPath.resolve(".git");
-        new InitializeGitCommand(os, dirPath).execute();
+        new InitializeGitCommand(os, dirPath, printer).execute();
     }
 
     @AfterMethod
@@ -47,7 +49,7 @@ public class LocalGitUserConfigCommandIT {
     public void shouldConfigureSingleGitUserInfo(String configElement, String name, String email) throws IOException {
         //g
         //w
-        new LocalGitUserConfigCommand(os, dirPath, name, email).execute();
+        new LocalGitUserConfigCommand(os, dirPath, name, email, printer).execute();
         //t
         assertTrue(contains(configElement, name),
                 "The git config should contain user.%s entry".formatted(configElement));
@@ -58,7 +60,7 @@ public class LocalGitUserConfigCommandIT {
         //w
         String name = "test user name";
         String email = "user@email.com";
-        new LocalGitUserConfigCommand(os, dirPath, name, email).execute();
+        new LocalGitUserConfigCommand(os, dirPath, name, email, printer).execute();
         //t
         SoftAssert sa = new SoftAssert();
         sa.assertTrue(contains("name", name),

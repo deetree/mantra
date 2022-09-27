@@ -19,13 +19,13 @@ interface NativeCommand extends Status {
 
     Result execute();
 
-    default Result execute(OS os, Path directory, String command) {
+    default Result execute(OS os, Path directory, String command, Printer printer) {
         ProcessBuilder processBuilder = new ProcessBuilder();
         processBuilder.directory(directory.toFile());
         processBuilder.command(joinCommand(os, command));
         try {
             Process process = processBuilder.start();
-            readProcessOutput(process);
+            readProcessOutput(process, printer);
             int exitCode = process.waitFor();
             return exitCode == 0 ? Result.OK : Result.ERROR;
         } catch (IOException | InterruptedException e) {
@@ -33,10 +33,9 @@ interface NativeCommand extends Status {
         }
     }
 
-    private void readProcessOutput(Process process) throws IOException {
+    private void readProcessOutput(Process process, Printer printer) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
-        Printer printer = Printer.getDefault();
         while ((line = reader.readLine()) != null) {
             printer.print(line);
         }

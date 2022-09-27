@@ -27,7 +27,7 @@ class Main {
 
         ConfigValues configValues = new ConfigValues(arguments.directory, arguments.groupId, arguments.artifactId,
                 arguments.mainClass, arguments.gitUsername, arguments.gitEmail, "");
-        Configuration configuration = new Config(configFile, configValues);
+        Configuration configuration = new Config(configFile, configValues, printer);
 
         try {
             if (configuration.createConfigFile() == Result.OK)
@@ -64,13 +64,13 @@ class Main {
                     printer.print(INFO, "Creating project");
                     Creator.of(paths.projectPath(), paths.javaMainFilesPath(), paths.mainResourcesPath(),
                             paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
-                            arguments.artifactId, arguments.mainClass, arguments.javaVersion).create();
+                            arguments.artifactId, arguments.mainClass, arguments.javaVersion, printer).create();
                     printer.print(SUCCESS, "Project created successfully");
                     printer.print(INFO, "Identifying operating system");
                     OS os = new OperatingSystem().identify();
                     printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
                     Command command = Command.getDefault(paths.projectPath(), os,
-                            arguments.gitUsername, arguments.gitEmail);
+                            arguments.gitUsername, arguments.gitEmail, printer);
                     if (!arguments.disableGit)
                         command.executeGit();
                     command.openIntelliJ();

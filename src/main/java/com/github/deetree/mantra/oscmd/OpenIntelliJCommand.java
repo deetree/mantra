@@ -3,6 +3,7 @@ package com.github.deetree.mantra.oscmd;
 import com.github.deetree.mantra.ActionException;
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
 
@@ -13,10 +14,12 @@ class OpenIntelliJCommand implements NativeCommand {
 
     private final OS os;
     private final Path projectPath;
+    private final Printer printer;
 
-    OpenIntelliJCommand(OS os, Path projectPath) {
+    OpenIntelliJCommand(OS os, Path projectPath, Printer printer) {
         this.os = os;
         this.projectPath = projectPath;
+        this.printer = printer;
     }
 
     @Override
@@ -26,7 +29,7 @@ class OpenIntelliJCommand implements NativeCommand {
 
     @Override
     public Result execute() {
-        if (execute(os, projectPath, findCommand().formatted(projectPath)) != Result.OK)
+        if (execute(os, projectPath, findCommand().formatted(projectPath), printer) != Result.OK)
             throw new ActionException("An exception occurred during IntelliJ IDEA opening");
         return Result.OK;
     }
