@@ -37,8 +37,7 @@ class LocateIntelliJCommand implements NativeCommand {
     private String findCommand() {
         return switch (os) {
             case LINUX -> "locate idea.sh > %s";
-            case WINDOWS -> "for /f \"usebackq tokens=*\" %%i in " +
-                    "(`where /R C:\\PROGRA~1 idea64.exe`) do @start \"\" \"%%i\" %s";
+            case WINDOWS -> "where /R C:\\PROGRA~1 idea64.exe > %s";
         };
     }
 }
