@@ -13,7 +13,7 @@ class ConsolePrinter implements Printer {
 
     @Override
     public void print(Level level, String text) {
-        print("[%s%s%s] %s%n".formatted(level.color().toString(), level.name(), Color.RESET, text));
+        print("[%s%s%s] %s".formatted(level.color().toString(), level.name(), Color.RESET, text));
     }
 
     @Override
@@ -25,7 +25,7 @@ class ConsolePrinter implements Printer {
     }
 
     private void printout(String text) {
-        System.out.print(text);
+        System.out.println(text);
     }
 
     @Override
