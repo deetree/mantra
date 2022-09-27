@@ -4,7 +4,7 @@ package com.github.deetree.mantra.printer;
  * @author Mariusz Bal
  */
 public interface Printer {
-    boolean locked = false;
+
     static Printer getDefault() {
         return new ConsolePrinter();
     }

@@ -22,12 +22,22 @@ class Main {
     public static void main(String[] args) {
         Printer printer = Printer.getDefault();
 
+        printer.print(INFO, "Identifying operating system");
+        OS os;
+        try {
+            os = new OperatingSystem().identify();
+            printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
+        } catch (OSNotSupportedException e) {
+            printer.print(ERROR, e.getMessage());
+            return;//todo exit app
+        }
+
         File configFile = new File(System.getProperty("user.home"), ".mantra.config");
         Arguments arguments = new Arguments();
 
         ConfigValues configValues = new ConfigValues(arguments.directory, arguments.groupId, arguments.artifactId,
                 arguments.mainClass, arguments.gitUsername, arguments.gitEmail, "");
-        Configuration configuration = new Config(configFile, configValues, printer);
+        Configuration configuration = new Config(configFile, configValues, os, printer);
 
         try {
             if (configuration.createConfigFile() == Result.OK)
@@ -48,9 +58,10 @@ class Main {
         if (!wasHelpUsed(usage, version)) {
             if (arguments.configure) {
                 try {
-                    if (configuration.configureDefaults() == Result.OK) {
+                    if (configuration.configureDefaults() == Result.OK)
                         printer.print(SUCCESS, "Config file with defaults has been created");
-                    } else {printer.print(WARNING, "Something went wrong during default configuration creating");}
+                    else
+                        printer.print(WARNING, "Something went wrong during default configuration creating");
                 } catch (ActionException e) {
                     printer.print(WARNING, e.getMessage());
                 }
@@ -66,15 +77,12 @@ class Main {
                             paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
                             arguments.artifactId, arguments.mainClass, arguments.javaVersion, printer).create();
                     printer.print(SUCCESS, "Project created successfully");
-                    printer.print(INFO, "Identifying operating system");
-                    OS os = new OperatingSystem().identify();
-                    printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
                     Command command = Command.getDefault(paths.projectPath(), os,
                             arguments.gitUsername, arguments.gitEmail, printer);
                     if (!arguments.disableGit)
                         command.executeGit();
                     command.openIntelliJ();
-                } catch (ActionException | OSNotSupportedException e) {
+                } catch (ActionException e) {
                     printer.print(ERROR, e.getMessage());
                 }
             }
