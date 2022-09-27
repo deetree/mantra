@@ -21,29 +21,29 @@ public class PathResolverTest {
 
     public void shouldCreateProperProjectPath() {
         //g
-        String expected = directory + separator + projectName;
+        var expected = Path.of(directory, projectName);
         //w
         resolver = new ProjectPathResolver(directory, projectName);
         //t
-        assertEquals(resolver.resolve().toString(), expected, "The project path is not as expected");
+        assertEquals(resolver.resolve(), expected, "The project path is not as expected");
     }
 
     public void shouldCreateProperSourcePath() {
         //g
-        String expected = directory + separator + projectName + separator + src;
+        var expected = Path.of(directory, projectName, src);
         //w
         resolver = new SourcePathResolver(Path.of(directory, projectName));
         //t
-        assertEquals(resolver.resolve().toString(), expected, "The source path is not as expected");
+        assertEquals(resolver.resolve(), expected, "The source path is not as expected");
     }
 
     public void shouldCreateProperPackagePath() {
         //g
-        String expected = replaceGroup() + separator + artifact;
+        var expected = Path.of(replaceGroup(), artifact);
         //w
         resolver = new PackagePathResolver(group, artifact);
         //t
-        assertEquals(resolver.resolve().toString(), expected, "The package path is not as expected");
+        assertEquals(resolver.resolve(), expected, "The package path is not as expected");
     }
 
     @DataProvider
@@ -57,8 +57,8 @@ public class PathResolverTest {
     @Test(dataProvider = "parentDirectoryProvider")
     public void shouldCreateProperJavaPath(Directory parent) {
         //g
-        String expected = directory + separator + projectName + separator + src + separator + parent +
-                separator + "java" + separator + replaceGroup() + separator + artifact;
+        var expected = Path.of(directory, projectName, src, parent.toString(),
+                "java", replaceGroup(), artifact);
         //w
         resolver = new JavaFilesPathResolver(
                 new SourcePathResolver(new ProjectPathResolver(directory, projectName).resolve()).resolve(),
@@ -66,21 +66,20 @@ public class PathResolverTest {
                 new PackagePathResolver(group, artifact).resolve()
         );
         //t
-        assertEquals(resolver.resolve().toString(), expected, "The java files path is not as expected");
+        assertEquals(resolver.resolve(), expected, "The java files path is not as expected");
     }
 
     @Test(dataProvider = "parentDirectoryProvider")
     public void shouldCreateProperResourcesPath(Directory parent) {
         //g
-        String expected = directory + separator + projectName + separator + src +
-                separator + parent + separator + "resources";
+        var expected = Path.of(directory, projectName, src, parent.toString(), "resources");
         //w
         resolver = new ResourcesPathResolver(
                 new SourcePathResolver(new ProjectPathResolver(directory, projectName).resolve()).resolve(),
                 parent
         );
         //t
-        assertEquals(resolver.resolve().toString(), expected, "The resources path is not as expected");
+        assertEquals(resolver.resolve(), expected, "The resources path is not as expected");
     }
 
     private String replaceGroup() {
