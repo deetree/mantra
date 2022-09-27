@@ -25,7 +25,7 @@ class MainClassCreator implements FileCreator {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating main class";
     }
 
@@ -41,8 +41,13 @@ class MainClassCreator implements FileCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
-        return "Main class created";
+    public String makePostExecuteSuccessStatus() {
+        return "Main class file created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create main class file";
     }
 
     private String replaceVariables(String pom) {

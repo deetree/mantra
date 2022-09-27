@@ -14,7 +14,7 @@ class ProjectDirectoryCreator implements DirectoryCreator {
     ProjectDirectoryCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating project directory";
     }
 
@@ -24,7 +24,12 @@ class ProjectDirectoryCreator implements DirectoryCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Project directory created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create project directory";
     }
 }

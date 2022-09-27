@@ -23,7 +23,7 @@ class OpenIntelliJCommand implements NativeCommand {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Opening the project in IntelliJ IDEA";
     }
 
@@ -35,8 +35,13 @@ class OpenIntelliJCommand implements NativeCommand {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Project opened successfully";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "The project could not be opened";
     }
 
     private String findCommand() {

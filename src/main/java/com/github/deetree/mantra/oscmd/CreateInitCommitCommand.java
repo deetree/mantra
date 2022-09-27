@@ -23,7 +23,7 @@ class CreateInitCommitCommand implements NativeCommand {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating initial commit";
     }
 
@@ -35,7 +35,12 @@ class CreateInitCommitCommand implements NativeCommand {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Initial commit created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Initial commit could not be created";
     }
 }

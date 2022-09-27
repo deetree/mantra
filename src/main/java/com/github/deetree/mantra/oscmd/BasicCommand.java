@@ -50,8 +50,10 @@ class BasicCommand implements Command {
     }
 
     private void executeCommand(NativeCommand command) {
-        printer.print(Level.INFO, command.preExecuteStatus());
+        printer.print(Level.INFO, command.makePreExecuteStatus());
         if (command.execute() == Result.OK)
-            printer.print(Level.SUCCESS, command.postExecuteStatus());
+            printer.print(Level.SUCCESS, command.makePostExecuteSuccessStatus());
+        else
+            printer.print(Level.ERROR, command.makePostExecuteErrorStatus());
     }
 }

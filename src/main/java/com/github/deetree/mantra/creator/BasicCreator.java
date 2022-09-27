@@ -65,8 +65,10 @@ class BasicCreator implements Creator {
 
     private void executeCreator(Creator creator) {
         Status status = (Status) creator;
-        printer.print(Level.INFO, status.preExecuteStatus());
-        creator.create();
-        printer.print(Level.SUCCESS, status.postExecuteStatus());
+        printer.print(Level.INFO, status.makePreExecuteStatus());
+        if (creator.create() == Result.OK)
+            printer.print(Level.SUCCESS, status.makePostExecuteSuccessStatus());
+        else
+            printer.print(Level.ERROR, status.makePostExecuteErrorStatus());
     }
 }

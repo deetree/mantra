@@ -23,7 +23,7 @@ class InitializeGitCommand implements NativeCommand {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Initializing local git repository";
     }
 
@@ -35,7 +35,12 @@ class InitializeGitCommand implements NativeCommand {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Git repository initialized successfully";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not initialize git repository";
     }
 }

@@ -19,7 +19,7 @@ class CodeDirectoryCreator implements DirectoryCreator {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating %s files directory".formatted(isTestPath() ? "test" : "main");
     }
 
@@ -31,8 +31,13 @@ class CodeDirectoryCreator implements DirectoryCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Created %s files directory".formatted(isTestPath() ? "test" : "main");
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create %s files directory".formatted(isTestPath() ? "test" : "main");
     }
 
     private boolean isTestPath() {

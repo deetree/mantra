@@ -27,7 +27,7 @@ class PomCreator implements FileCreator {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating basic POM file";
     }
 
@@ -44,8 +44,13 @@ class PomCreator implements FileCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Basic POM file created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create POM file";
     }
 
     private String replaceVariables(String pom) {

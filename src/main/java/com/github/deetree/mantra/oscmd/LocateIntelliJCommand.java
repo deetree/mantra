@@ -22,7 +22,7 @@ class LocateIntelliJCommand implements NativeCommand {
     }
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Locating IntelliJ IDEA";
     }
 
@@ -33,8 +33,13 @@ class LocateIntelliJCommand implements NativeCommand {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "IntelliJ IDEA located. The path has been stored in the config file. You can change it in config mode.";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "IntelliJ IDEA could not be located. Provide the path manually.";
     }
 
     private String findCommand() {

@@ -19,7 +19,7 @@ class GitignoreCreator implements FileCreator {
     GitignoreCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override
-    public String preExecuteStatus() {
+    public String makePreExecuteStatus() {
         return "Creating basic .gitignore file";
     }
 
@@ -36,7 +36,12 @@ class GitignoreCreator implements FileCreator {
     }
 
     @Override
-    public String postExecuteStatus() {
+    public String makePostExecuteSuccessStatus() {
         return "Basic .gitignore file created";
+    }
+
+    @Override
+    public String makePostExecuteErrorStatus() {
+        return "Could not create .gitignore file";
     }
 }
