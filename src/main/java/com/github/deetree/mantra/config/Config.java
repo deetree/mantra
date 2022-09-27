@@ -2,6 +2,7 @@ package com.github.deetree.mantra.config;
 
 import com.github.deetree.mantra.Reader;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Printer;
 
 import java.io.File;
 import java.util.Properties;
@@ -13,10 +14,12 @@ public class Config implements Configuration {
 
     private final File configFile;
     private final ConfigValues configValues;
+    private final Printer printer;
 
-    public Config(File configFile, ConfigValues configValues) {
+    public Config(File configFile, ConfigValues configValues, Printer printer) {
         this.configFile = configFile;
         this.configValues = configValues;
+        this.printer = printer;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class Config implements Configuration {
 
     @Override
     public Result configureDefaults() {
-        return new InteractiveConfiguration(Reader.getDefault(), configFile).configure();
+        return new InteractiveConfiguration(Reader.getDefault(), configFile, printer).configure();
     }
 
     private boolean configExists() {

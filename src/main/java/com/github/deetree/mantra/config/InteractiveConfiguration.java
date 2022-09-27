@@ -18,12 +18,13 @@ class InteractiveConfiguration {
 
     private final Reader reader;
     private final File configFile;
-    private final Printer printer = Printer.getDefault();
+    private final Printer printer;
     private final Properties properties = new Properties();
 
-    InteractiveConfiguration(Reader reader, File configFile) {
+    InteractiveConfiguration(Reader reader, File configFile, Printer printer) {
         this.reader = reader;
         this.configFile = configFile;
+        this.printer = printer;
     }
 
     Result configure() {
