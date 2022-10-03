@@ -8,6 +8,8 @@ import com.github.deetree.mantra.printer.Printer;
 import java.nio.file.Path;
 
 /**
+ * Initial commit creating native command.
+ *
  * @author Mariusz Bal
  */
 class CreateInitCommitCommand implements NativeCommand {

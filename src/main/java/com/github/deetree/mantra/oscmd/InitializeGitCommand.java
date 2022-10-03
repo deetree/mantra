@@ -8,6 +8,8 @@ import com.github.deetree.mantra.printer.Printer;
 import java.nio.file.Path;
 
 /**
+ * Git repository initializing native command.
+ *
  * @author Mariusz Bal
  */
 class InitializeGitCommand implements NativeCommand {

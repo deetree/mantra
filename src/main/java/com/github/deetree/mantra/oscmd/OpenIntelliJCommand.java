@@ -8,6 +8,8 @@ import com.github.deetree.mantra.printer.Printer;
 import java.nio.file.Path;
 
 /**
+ * IntelliJ IDEA launcher.
+ *
  * @author Mariusz Bal
  */
 class OpenIntelliJCommand implements NativeCommand {

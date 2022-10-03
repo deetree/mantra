@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 /**
+ * Entry point for executing native commands.
+ *
  * @author Mariusz Bal
  */
 class BasicCommand implements Command {

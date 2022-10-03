@@ -8,6 +8,8 @@ import com.github.deetree.mantra.printer.Printer;
 import java.nio.file.Path;
 
 /**
+ * Local git repository user info configuration native command.
+ *
  * @author Mariusz Bal
  */
 class LocalGitUserConfigCommand implements NativeCommand {

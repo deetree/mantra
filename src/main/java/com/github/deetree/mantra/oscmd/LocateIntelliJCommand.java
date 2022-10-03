@@ -7,6 +7,8 @@ import com.github.deetree.mantra.printer.Printer;
 import java.nio.file.Path;
 
 /**
+ * IntelliJ IDEA launcher path locating native command.
+ *
  * @author Mariusz Bal
  */
 class LocateIntelliJCommand implements NativeCommand {
