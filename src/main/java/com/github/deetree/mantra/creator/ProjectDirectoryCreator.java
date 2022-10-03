@@ -5,12 +5,19 @@ import com.github.deetree.mantra.Result;
 import java.nio.file.Path;
 
 /**
+ * Whole project directory creator.
+ *
  * @author Mariusz Bal
  */
 class ProjectDirectoryCreator implements DirectoryCreator {
 
     private final Path projectPath;
 
+    /**
+     * Instantiate project directory creator.
+     *
+     * @param projectPath project directory path
+     */
     ProjectDirectoryCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override

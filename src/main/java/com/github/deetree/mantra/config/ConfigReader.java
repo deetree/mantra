@@ -5,6 +5,8 @@ import java.util.Properties;
 import static com.github.deetree.mantra.config.PropertyName.*;
 
 /**
+ * Reads the config values from properties
+ *
  * @author Mariusz Bal
  */
 class ConfigReader {
@@ -12,11 +14,22 @@ class ConfigReader {
     private final Properties properties;
     private final ConfigValues configValues;
 
+    /**
+     * Create configuration reader.
+     *
+     * @param properties   loaded configuration defaults
+     * @param configValues configuration values to be transferred back
+     */
     ConfigReader(Properties properties, ConfigValues configValues) {
         this.properties = properties;
         this.configValues = configValues;
     }
 
+    /**
+     * Read the configuration properties.
+     *
+     * @return configuration values that were matched in config file or app defaults otherwise
+     */
     ConfigValues read() {
         return new ConfigValues(
                 properties.getProperty(DIRECTORY.toString(), configValues.directory()),

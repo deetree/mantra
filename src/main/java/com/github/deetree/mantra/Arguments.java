@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
+ * Mantra's command line options.
+ *
  * @author Mariusz Bal
  */
 @Command(name = "mantra", description = "Kickstart your Java (Maven) project",
@@ -54,6 +56,11 @@ class Arguments implements Runnable {
             artifactId = name;
     }
 
+    /**
+     * Update options with defaults read from config file.
+     *
+     * @param configValues config file defaults
+     */
     void updateWithConfig(ConfigValues configValues) {
         directory = configValues.directory();
         groupId = configValues.group();
@@ -63,6 +70,11 @@ class Arguments implements Runnable {
         gitEmail = configValues.email();
     }
 
+    /**
+     * Configuration flag preprocessor which adds mocked project name to command line arguments
+     * when configuration flag was matched, so the error informing about no required parameter (project name)
+     * does not appear and the unnecessary usage help is not printed out.
+     */
     static class ConfigFlagPreprocessor implements CommandLine.IParameterPreprocessor {
         @Override
         public boolean preprocess(Stack<String> args, CommandLine.Model.CommandSpec commandSpec,

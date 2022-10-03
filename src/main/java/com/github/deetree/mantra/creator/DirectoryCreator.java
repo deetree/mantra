@@ -9,10 +9,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
+ * Project directories creator.
+ *
  * @author Mariusz Bal
  */
 interface DirectoryCreator extends Creator, Status {
 
+    /**
+     * Create project directories.
+     *
+     * @param path path of the directory
+     * @return result of directory creating
+     */
     default Result createDirectories(Path path) {
         try {
             Files.createDirectories(path);

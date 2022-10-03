@@ -6,6 +6,8 @@ import java.io.File;
 import java.nio.file.Path;
 
 /**
+ * {@code Main} and {@code Test } code directory creator
+ *
  * @author Mariusz Bal
  */
 class CodeDirectoryCreator implements DirectoryCreator {
@@ -13,6 +15,12 @@ class CodeDirectoryCreator implements DirectoryCreator {
     private final Path javaPath;
     private final Path resourcesPath;
 
+    /**
+     * Instantiate code directory creator.
+     *
+     * @param javaPath      java files directory path
+     * @param resourcesPath resources directory path
+     */
     CodeDirectoryCreator(Path javaPath, Path resourcesPath) {
         this.javaPath = javaPath;
         this.resourcesPath = resourcesPath;

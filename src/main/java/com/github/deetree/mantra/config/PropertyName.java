@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.config;
 
 /**
+ * Properties used to store defaults in config file.
+ *
  * @author Mariusz Bal
  */
 enum PropertyName {
@@ -14,6 +16,11 @@ enum PropertyName {
 
     private final String name;
 
+    /**
+     * Instantiate property name.
+     *
+     * @param name property name
+     */
     PropertyName(String name) {
         this.name = name;
     }

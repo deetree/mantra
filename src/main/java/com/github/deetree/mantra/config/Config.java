@@ -11,6 +11,9 @@ import java.util.Properties;
 import static com.github.deetree.mantra.config.PropertyName.LAUNCHER;
 
 /**
+ * Entry point for mantra configuration creating.
+ * Allows to set the default values that will be used in every app run.
+ *
  * @author Mariusz Bal
  */
 public class Config implements Configuration {
@@ -20,6 +23,14 @@ public class Config implements Configuration {
     private final OS os;
     private final Printer printer;
 
+    /**
+     * Create configuration object for performing config related tasks.
+     *
+     * @param configFile   configuration file
+     * @param configValues configuration defaults transferring object
+     * @param os           operating system
+     * @param printer      printer for user output printing
+     */
     public Config(File configFile, ConfigValues configValues, OS os, Printer printer) {
         this.configFile = configFile;
         this.configValues = configValues;

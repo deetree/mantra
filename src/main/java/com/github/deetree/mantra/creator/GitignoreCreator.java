@@ -10,12 +10,19 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 /**
+ * Basic .gitignore file creator.
+ *
  * @author Mariusz Bal
  */
 class GitignoreCreator implements FileCreator {
 
     private final Path projectPath;
 
+    /**
+     * Create gitignore file creator.
+     *
+     * @param projectPath project directory path where the .gitignore file will be created
+     */
     GitignoreCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override

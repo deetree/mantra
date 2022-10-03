@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 /**
+ * Entry point for executing native commands.
+ *
  * @author Mariusz Bal
  */
 class BasicCommand implements Command {
@@ -19,6 +21,15 @@ class BasicCommand implements Command {
     private final String gitUserEmail;
     private final Printer printer;
 
+    /**
+     * Instantiate basic native command executor.
+     *
+     * @param projectPath  project directory path
+     * @param os           operating system
+     * @param gitUsername  local git username
+     * @param gitUserEmail local git user email
+     * @param printer      output printer
+     */
     BasicCommand(Path projectPath, OS os, String gitUsername, String gitUserEmail, Printer printer) {
         this.projectPath = projectPath;
         this.os = os;

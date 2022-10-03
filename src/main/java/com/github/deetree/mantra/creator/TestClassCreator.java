@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
+ * Basic test class file creator.
+ *
  * @author Mariusz Bal
  */
 class TestClassCreator implements FileCreator {
@@ -17,6 +19,14 @@ class TestClassCreator implements FileCreator {
     private final String artifactId;
     private final String mainClass;
 
+    /**
+     * Instantiate test class file creator.
+     *
+     * @param testJavaFilesPath test java files directory path
+     * @param groupId           project's groupId
+     * @param artifactId        project's artifactId
+     * @param mainClass         main class name
+     */
     TestClassCreator(Path testJavaFilesPath, String groupId, String artifactId, String mainClass) {
         this.testJavaFilesPath = testJavaFilesPath;
         this.groupId = groupId;

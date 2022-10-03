@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.config;
 
 /**
+ * Configuration defaults for transferring them between classes.
+ *
  * @author Mariusz Bal
  */
 public record ConfigValues(

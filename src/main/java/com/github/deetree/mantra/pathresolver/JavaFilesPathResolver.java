@@ -3,6 +3,8 @@ package com.github.deetree.mantra.pathresolver;
 import java.nio.file.Path;
 
 /**
+ * Java files directory path resolver based on parent ({@link Directory#MAIN} or {@link Directory#TEST}).
+ *
  * @author Mariusz Bal
  */
 class JavaFilesPathResolver implements Resolver {
@@ -11,6 +13,13 @@ class JavaFilesPathResolver implements Resolver {
     private final Directory parent;
     private final Path packagePath;
 
+    /**
+     * Java files path resolver.
+     *
+     * @param sourcesPath sources directory path
+     * @param parent      parent directory
+     * @param packagePath package path
+     */
     JavaFilesPathResolver(Path sourcesPath, Directory parent, Path packagePath) {
         this.sourcesPath = sourcesPath;
         this.parent = parent;

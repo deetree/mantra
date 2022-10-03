@@ -13,12 +13,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Native command executing.
+ *
  * @author Mariusz Bal
  */
 interface NativeCommand extends Status {
 
+    /**
+     * Execute the native command.
+     *
+     * @return execution result
+     */
     Result execute();
 
+    /**
+     * Execute native command in the OS shell through {@link ProcessBuilder}.
+     *
+     * @param os        operating system
+     * @param directory working directory
+     * @param command   command to be executed in the shell
+     * @param printer   printer for output printing
+     * @return result of native command execution
+     */
     default Result execute(OS os, Path directory, String command, Printer printer) {
         ProcessBuilder processBuilder = new ProcessBuilder();
         processBuilder.directory(directory.toFile());

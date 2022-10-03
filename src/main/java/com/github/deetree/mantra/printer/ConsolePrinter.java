@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
+ * Console output printer.
+ *
  * @author Mariusz Bal
  */
 class ConsolePrinter implements Printer {

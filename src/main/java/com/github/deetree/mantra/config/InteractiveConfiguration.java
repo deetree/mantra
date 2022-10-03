@@ -12,6 +12,8 @@ import static com.github.deetree.mantra.config.PropertyName.values;
 import static com.github.deetree.mantra.printer.Level.INFO;
 
 /**
+ * Interactive configuration file creating.
+ *
  * @author Mariusz Bal
  */
 class InteractiveConfiguration {
@@ -21,6 +23,14 @@ class InteractiveConfiguration {
     private final Printer printer;
     private final Properties properties;
 
+    /**
+     * Create interactive configuration object.
+     *
+     * @param reader     user input reader
+     * @param configFile configuration file
+     * @param properties properties to be stored in the config file
+     * @param printer    output printer
+     */
     InteractiveConfiguration(Reader reader, File configFile, Properties properties, Printer printer) {
         this.reader = reader;
         this.configFile = configFile;
@@ -28,6 +38,11 @@ class InteractiveConfiguration {
         this.printer = printer;
     }
 
+    /**
+     * Configure the defaults by prompting for each property.
+     *
+     * @return result of config file writing
+     */
     Result configure() {
         printer.print(INFO, "Interactive config file creating mode. Existing configuration will be overridden.");
         printer.print(INFO, "Provide defaults for given parameters. Leave empty to skip.");

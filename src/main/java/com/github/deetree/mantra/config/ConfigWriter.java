@@ -7,16 +7,29 @@ import java.io.*;
 import java.util.Properties;
 
 /**
+ * Writes the configuration file.
+ *
  * @author Mariusz Bal
  */
 class ConfigWriter {
 
     private final File configFile;
 
+    /**
+     * Create configuration file writer.
+     *
+     * @param configFile a file where the configuration will be stored
+     */
     ConfigWriter(File configFile) {
         this.configFile = configFile;
     }
 
+    /**
+     * Create configuration file with given properties.
+     *
+     * @param properties properties to be stored in the config file
+     * @return result of config writing
+     */
     Result createConfig(Properties properties) {
         Result result = applyProperties(properties);
         if (properties.isEmpty())

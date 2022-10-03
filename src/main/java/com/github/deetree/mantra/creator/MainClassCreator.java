@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
+ * Basic main class file creator.
+ *
  * @author Mariusz Bal
  */
 class MainClassCreator implements FileCreator {
@@ -17,6 +19,14 @@ class MainClassCreator implements FileCreator {
     private final String artifactId;
     private final String mainClass;
 
+    /**
+     * Instantiate main class file creator.
+     *
+     * @param mainJavaFilesPath main java files directory path
+     * @param groupId           project's groupId
+     * @param artifactId        project's artifactId
+     * @param mainClass         main class name
+     */
     MainClassCreator(Path mainJavaFilesPath, String groupId, String artifactId, String mainClass) {
         this.mainJavaFilesPath = mainJavaFilesPath;
         this.groupId = groupId;

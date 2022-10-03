@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.printer;
 
 /**
+ * ANSII colors for printing colored output.
+ *
  * @author Mariusz Bal
  */
 enum Color {
@@ -12,6 +14,11 @@ enum Color {
 
     private final String ansiiColor;
 
+    /**
+     * Color representation.
+     *
+     * @param ansiiColor ansii color formatting
+     */
     Color(String ansiiColor) {
         this.ansiiColor = ansiiColor;
     }
