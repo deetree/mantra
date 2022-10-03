@@ -7,6 +7,11 @@ package com.github.deetree.mantra;
  */
 class OSNotSupportedException extends RuntimeException {
 
+    /**
+     * Create exception when the OS is unsupported.
+     *
+     * @param message message
+     */
     OSNotSupportedException(String message) {
         super(message);
     }

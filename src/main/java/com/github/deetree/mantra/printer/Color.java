@@ -14,6 +14,11 @@ enum Color {
 
     private final String ansiiColor;
 
+    /**
+     * Color representation.
+     *
+     * @param ansiiColor ansii color formatting
+     */
     Color(String ansiiColor) {
         this.ansiiColor = ansiiColor;
     }

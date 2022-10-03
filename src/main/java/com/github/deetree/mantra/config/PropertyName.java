@@ -16,6 +16,11 @@ enum PropertyName {
 
     private final String name;
 
+    /**
+     * Instantiate property name.
+     *
+     * @param name property name
+     */
     PropertyName(String name) {
         this.name = name;
     }

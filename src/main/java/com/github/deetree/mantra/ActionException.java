@@ -7,6 +7,11 @@ package com.github.deetree.mantra;
  */
 public class ActionException extends RuntimeException {
 
+    /**
+     * Create exception when an error occurs while performing task
+     *
+     * @param message exception message
+     */
     public ActionException(String message) {
         super(message);
     }

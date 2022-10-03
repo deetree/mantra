@@ -13,6 +13,11 @@ public enum OS {
 
     private final List<String> shellCommand;
 
+    /**
+     * Operating system entry creator
+     *
+     * @param shellCommand OS command for executing native shell commands
+     */
     OS(List<String> shellCommand) {
         this.shellCommand = shellCommand;
     }

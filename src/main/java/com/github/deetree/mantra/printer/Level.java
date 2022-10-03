@@ -13,6 +13,11 @@ public enum Level {
 
     private final Color color;
 
+    /**
+     * Level representation.
+     *
+     * @param color ansii color representation
+     */
     Level(Color color) {
         this.color = color;
     }
