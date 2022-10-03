@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.pathresolver;
 
 /**
+ * Directory names used within the project.
+ *
  * @author Mariusz Bal
  */
 enum Directory {

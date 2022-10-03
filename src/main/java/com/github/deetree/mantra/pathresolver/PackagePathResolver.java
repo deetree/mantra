@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.Path;
 
 /**
+ * Package path resolver for combining groupId and artifactId.
+ *
  * @author Mariusz Bal
  */
 class PackagePathResolver implements Resolver {

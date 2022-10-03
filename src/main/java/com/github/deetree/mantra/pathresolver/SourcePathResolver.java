@@ -3,6 +3,8 @@ package com.github.deetree.mantra.pathresolver;
 import java.nio.file.Path;
 
 /**
+ * Sources directory path resolver.
+ *
  * @author Mariusz Bal
  */
 class SourcePathResolver implements Resolver {

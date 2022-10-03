@@ -3,6 +3,8 @@ package com.github.deetree.mantra.pathresolver;
 import java.nio.file.Path;
 
 /**
+ * Project paths resolver.
+ *
  * @author Mariusz Bal
  */
 public class PathResolver {
@@ -19,6 +21,11 @@ public class PathResolver {
         this.artifactId = artifactId;
     }
 
+    /**
+     * Resolve all project paths.
+     *
+     * @return all project paths object
+     */
     public ResolvedPaths resolvePaths() {
         Path projectPath = new ProjectPathResolver(directory, name).resolve();
         Path sourcesPath = new SourcePathResolver(projectPath).resolve();
