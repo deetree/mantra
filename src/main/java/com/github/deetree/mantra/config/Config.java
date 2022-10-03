@@ -11,6 +11,9 @@ import java.util.Properties;
 import static com.github.deetree.mantra.config.PropertyName.LAUNCHER;
 
 /**
+ * Entry point for mantra configuration creating.
+ * Allows to set the default values that will be used in every app run.
+ *
  * @author Mariusz Bal
  */
 public class Config implements Configuration {

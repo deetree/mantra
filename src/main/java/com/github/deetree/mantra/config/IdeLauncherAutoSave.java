@@ -9,6 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
+ * Find the IDE launcher path automatically.
+ *
  * @author Mariusz Bal
  */
 class IdeLauncherAutoSave {
@@ -21,6 +23,11 @@ class IdeLauncherAutoSave {
         this.printer = printer;
     }
 
+    /**
+     * Find the IDE launcher path.
+     *
+     * @return IDE launcher path that has been found
+     */
     String findPath() {
         try {
             Path launcherPathFile = Files.createTempFile("idea_launcher", ".path");

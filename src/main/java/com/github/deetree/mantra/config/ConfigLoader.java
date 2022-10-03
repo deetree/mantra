@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
+ * Configuration defaults loader.
+ *
  * @author Mariusz Bal
  */
 class ConfigLoader {
@@ -19,6 +21,11 @@ class ConfigLoader {
         this.configFile = configFile;
     }
 
+    /**
+     * Load the configuration properties.
+     *
+     * @return configuration defaults stored in config file
+     */
     Properties load() {
         try {
             FileInputStream propsInput = new FileInputStream(configFile);

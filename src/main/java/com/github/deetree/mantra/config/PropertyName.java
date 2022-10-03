@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.config;
 
 /**
+ * Properties used to store defaults in config file.
+ *
  * @author Mariusz Bal
  */
 enum PropertyName {
