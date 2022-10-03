@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.printer;
 
 /**
+ * ANSII colors for printing colored output.
+ *
  * @author Mariusz Bal
  */
 enum Color {

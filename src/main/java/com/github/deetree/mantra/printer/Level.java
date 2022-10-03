@@ -1,6 +1,8 @@
 package com.github.deetree.mantra.printer;
 
 /**
+ * Level of severity for printing out different tags and colors related to them.
+ *
  * @author Mariusz Bal
  */
 public enum Level {
