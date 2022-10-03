@@ -6,6 +6,8 @@ import java.io.File;
 import java.nio.file.Path;
 
 /**
+ * {@code Main} and {@code Test } code directory creator
+ *
  * @author Mariusz Bal
  */
 class CodeDirectoryCreator implements DirectoryCreator {

@@ -5,6 +5,8 @@ import com.github.deetree.mantra.Result;
 import java.nio.file.Path;
 
 /**
+ * Whole project directory creator.
+ *
  * @author Mariusz Bal
  */
 class ProjectDirectoryCreator implements DirectoryCreator {

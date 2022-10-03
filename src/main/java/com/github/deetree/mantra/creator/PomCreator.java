@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
+ * Basic POM file creator.
+ *
  * @author Mariusz Bal
  */
 class PomCreator implements FileCreator {

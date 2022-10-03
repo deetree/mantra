@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
+ * Create a file with given content.
+ *
  * @author Mariusz Bal
  */
 class FileWriter {
@@ -19,6 +21,12 @@ class FileWriter {
         this.text = text;
     }
 
+    /**
+     * Write content to the file
+     *
+     * @return result of file writing
+     * @throws IOException if an I/O error occurs while writing to or creating the file
+     */
     Result write() throws IOException {
         Files.write(toPath, text.getBytes());
         return Result.OK;

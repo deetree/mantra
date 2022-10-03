@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 
 /**
+ * Basic test class file creator.
+ *
  * @author Mariusz Bal
  */
 class TestClassCreator implements FileCreator {

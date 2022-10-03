@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 /**
+ * Basic .gitignore file creator.
+ *
  * @author Mariusz Bal
  */
 class GitignoreCreator implements FileCreator {

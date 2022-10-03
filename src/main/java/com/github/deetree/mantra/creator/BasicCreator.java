@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 /**
+ * Basic project structure creator.
+ *
  * @author Mariusz Bal
  */
 class BasicCreator implements Creator {
