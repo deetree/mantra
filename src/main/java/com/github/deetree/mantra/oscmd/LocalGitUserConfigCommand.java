@@ -20,6 +20,15 @@ class LocalGitUserConfigCommand implements NativeCommand {
     private final String email;
     private final Printer printer;
 
+    /**
+     * Local git repository user info configuration.
+     *
+     * @param os          operating system
+     * @param projectPath project directory path
+     * @param user        username
+     * @param email       user email
+     * @param printer     output printer
+     */
     LocalGitUserConfigCommand(OS os, Path projectPath, String user, String email, Printer printer) {
         this.os = os;
         this.projectPath = projectPath;

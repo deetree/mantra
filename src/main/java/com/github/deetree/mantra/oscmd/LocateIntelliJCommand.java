@@ -17,6 +17,13 @@ class LocateIntelliJCommand implements NativeCommand {
     private final Path launcherPathFile;
     private final Printer printer;
 
+    /**
+     * Locate IntelliJ IDEA native command.
+     *
+     * @param os               operating system
+     * @param launcherPathFile file to store IDE launcher path
+     * @param printer          output printer
+     */
     LocateIntelliJCommand(OS os, Path launcherPathFile, Printer printer) {
         this.os = os;
         this.launcherPathFile = launcherPathFile;

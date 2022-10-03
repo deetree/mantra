@@ -18,6 +18,11 @@ class GitignoreCreator implements FileCreator {
 
     private final Path projectPath;
 
+    /**
+     * Create gitignore file creator.
+     *
+     * @param projectPath project directory path where the .gitignore file will be created
+     */
     GitignoreCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override

@@ -12,6 +12,11 @@ class ConsoleReader implements Reader {
 
     private final Scanner scanner;
 
+    /**
+     * Create console user input reader.
+     *
+     * @param inputStream input stream which is used to read the input
+     */
     ConsoleReader(InputStream inputStream) {
         this.scanner = new Scanner(inputStream);
     }

@@ -13,6 +13,11 @@ class ProjectDirectoryCreator implements DirectoryCreator {
 
     private final Path projectPath;
 
+    /**
+     * Instantiate project directory creator.
+     *
+     * @param projectPath project directory path
+     */
     ProjectDirectoryCreator(Path projectPath) {this.projectPath = projectPath;}
 
     @Override

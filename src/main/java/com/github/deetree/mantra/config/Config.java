@@ -23,6 +23,14 @@ public class Config implements Configuration {
     private final OS os;
     private final Printer printer;
 
+    /**
+     * Create configuration object for performing config related tasks.
+     *
+     * @param configFile   configuration file
+     * @param configValues configuration defaults transferring object
+     * @param os           operating system
+     * @param printer      printer for user output printing
+     */
     public Config(File configFile, ConfigValues configValues, OS os, Printer printer) {
         this.configFile = configFile;
         this.configValues = configValues;

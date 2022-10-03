@@ -13,6 +13,12 @@ class PackagePathResolver implements Resolver {
     private final String groupId;
     private final String artifactId;
 
+    /**
+     * Package path resolver.
+     *
+     * @param groupId    project's groupId
+     * @param artifactId project's artifactId
+     */
     PackagePathResolver(String groupId, String artifactId) {
         this.groupId = groupId;
         this.artifactId = artifactId;

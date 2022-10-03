@@ -17,6 +17,11 @@ class ConfigLoader {
 
     private final File configFile;
 
+    /**
+     * Create configuration defaults file loader.
+     *
+     * @param configFile config file where the defaults are stored
+     */
     ConfigLoader(File configFile) {
         this.configFile = configFile;
     }

@@ -15,6 +15,11 @@ class ConfigWriter {
 
     private final File configFile;
 
+    /**
+     * Create configuration file writer.
+     *
+     * @param configFile a file where the configuration will be stored
+     */
     ConfigWriter(File configFile) {
         this.configFile = configFile;
     }

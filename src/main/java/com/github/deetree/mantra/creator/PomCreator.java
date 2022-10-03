@@ -20,6 +20,15 @@ class PomCreator implements FileCreator {
     private final String mainClass;
     private final String javaVersion;
 
+    /**
+     * Instantiate POM file creator.
+     *
+     * @param projectPath project directory path
+     * @param groupId     project's groupId
+     * @param artifactId  project's artifactId
+     * @param mainClass   main class name
+     * @param javaVersion java version
+     */
     PomCreator(Path projectPath, String groupId, String artifactId, String mainClass, String javaVersion) {
         this.projectPath = projectPath;
         this.groupId = groupId;

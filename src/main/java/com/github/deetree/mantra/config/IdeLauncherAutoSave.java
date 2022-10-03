@@ -18,6 +18,12 @@ class IdeLauncherAutoSave {
     private final OS os;
     private final Printer printer;
 
+    /**
+     * Create IDE launcher path auto save object.
+     *
+     * @param os      operating system
+     * @param printer printer for output printing
+     */
     IdeLauncherAutoSave(OS os, Printer printer) {
         this.os = os;
         this.printer = printer;

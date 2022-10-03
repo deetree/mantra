@@ -18,6 +18,13 @@ class OpenIntelliJCommand implements NativeCommand {
     private final Path projectPath;
     private final Printer printer;
 
+    /**
+     * IntelliJ IDEA opener.
+     *
+     * @param os          operating system
+     * @param projectPath project directory path
+     * @param printer     output printer
+     */
     OpenIntelliJCommand(OS os, Path projectPath, Printer printer) {
         this.os = os;
         this.projectPath = projectPath;

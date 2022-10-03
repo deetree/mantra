@@ -12,6 +12,12 @@ class ProjectPathResolver implements Resolver {
     private final String directory;
     private final String name;
 
+    /**
+     * Create project path resolver.
+     *
+     * @param directory parent directory
+     * @param name      project's name
+     */
     ProjectPathResolver(String directory, String name) {
         this.directory = directory;
         this.name = name;

@@ -12,6 +12,12 @@ class CLIParser {
     private final String[] args;
     private final Arguments arguments;
 
+    /**
+     * Instantiate command line arguments parser
+     *
+     * @param args      command line arguments
+     * @param arguments options to be matched by cmd-line args
+     */
     CLIParser(String[] args, Arguments arguments) {
         this.args = args;
         this.arguments = arguments;

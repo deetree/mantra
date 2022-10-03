@@ -11,6 +11,11 @@ class UsageHelper implements Helper {
 
     private final CommandLine cmd;
 
+    /**
+     * Usage helper representation.
+     *
+     * @param cmd parsed command line interpreter
+     */
     UsageHelper(CommandLine cmd) {
         this.cmd = cmd;
     }

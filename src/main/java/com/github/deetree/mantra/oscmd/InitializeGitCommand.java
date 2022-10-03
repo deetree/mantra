@@ -18,6 +18,13 @@ class InitializeGitCommand implements NativeCommand {
     private final Path projectPath;
     private final Printer printer;
 
+    /**
+     * Initialize git repository command.
+     *
+     * @param os          operating system
+     * @param projectPath project directory path
+     * @param printer     output printer
+     */
     InitializeGitCommand(OS os, Path projectPath, Printer printer) {
         this.os = os;
         this.projectPath = projectPath;

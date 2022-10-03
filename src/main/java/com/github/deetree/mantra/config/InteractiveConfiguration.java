@@ -23,6 +23,14 @@ class InteractiveConfiguration {
     private final Printer printer;
     private final Properties properties;
 
+    /**
+     * Create interactive configuration object.
+     *
+     * @param reader     user input reader
+     * @param configFile configuration file
+     * @param properties properties to be stored in the config file
+     * @param printer    output printer
+     */
     InteractiveConfiguration(Reader reader, File configFile, Properties properties, Printer printer) {
         this.reader = reader;
         this.configFile = configFile;

@@ -14,6 +14,12 @@ class ConfigReader {
     private final Properties properties;
     private final ConfigValues configValues;
 
+    /**
+     * Create configuration reader.
+     *
+     * @param properties   loaded configuration defaults
+     * @param configValues configuration values to be transferred back
+     */
     ConfigReader(Properties properties, ConfigValues configValues) {
         this.properties = properties;
         this.configValues = configValues;

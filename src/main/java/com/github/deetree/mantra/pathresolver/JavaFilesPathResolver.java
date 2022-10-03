@@ -13,6 +13,13 @@ class JavaFilesPathResolver implements Resolver {
     private final Directory parent;
     private final Path packagePath;
 
+    /**
+     * Java files path resolver.
+     *
+     * @param sourcesPath sources directory path
+     * @param parent      parent directory
+     * @param packagePath package path
+     */
     JavaFilesPathResolver(Path sourcesPath, Directory parent, Path packagePath) {
         this.sourcesPath = sourcesPath;
         this.parent = parent;

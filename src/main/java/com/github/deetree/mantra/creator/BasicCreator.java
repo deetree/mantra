@@ -26,6 +26,20 @@ class BasicCreator implements Creator {
     private final int javaVersion;
     private final Printer printer;
 
+    /**
+     * Instantiate basic creator.
+     *
+     * @param projectPath       project directory path
+     * @param javaMainFilesPath java main files directory path
+     * @param mainResourcesPath main resources directory path
+     * @param javaTestFilesPath java test files directory path
+     * @param testResourcesPath test resources directory path
+     * @param groupId           project's groupId
+     * @param artifactId        project's artifactId
+     * @param mainClass         main class name
+     * @param javaVersion       java version
+     * @param printer           output printer
+     */
     BasicCreator(Path projectPath, Path javaMainFilesPath, Path mainResourcesPath,
                  Path javaTestFilesPath, Path testResourcesPath, String groupId,
                  String artifactId, String mainClass, int javaVersion, Printer printer) {

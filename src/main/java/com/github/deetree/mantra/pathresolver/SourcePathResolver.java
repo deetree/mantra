@@ -11,6 +11,11 @@ class SourcePathResolver implements Resolver {
 
     private final Path projectPath;
 
+    /**
+     * Create sources directory path resolver.
+     *
+     * @param projectPath project directory path
+     */
     SourcePathResolver(Path projectPath) {this.projectPath = projectPath;}
 
     @Override

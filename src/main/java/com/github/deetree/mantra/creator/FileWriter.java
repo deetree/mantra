@@ -16,6 +16,12 @@ class FileWriter {
     private final Path toPath;
     private final String text;
 
+    /**
+     * Create file writer.
+     *
+     * @param toPath path of the file that will be written to
+     * @param text   content of the file
+     */
     FileWriter(Path toPath, String text) {
         this.toPath = toPath;
         this.text = text;

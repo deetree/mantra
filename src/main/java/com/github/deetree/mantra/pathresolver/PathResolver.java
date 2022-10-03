@@ -14,6 +14,14 @@ public class PathResolver {
     private final String groupId;
     private final String artifactId;
 
+    /**
+     * Create path resolver.
+     *
+     * @param directory  project's parent directory path
+     * @param name       project name
+     * @param groupId    project's groupId
+     * @param artifactId project's artifactId
+     */
     public PathResolver(String directory, String name, String groupId, String artifactId) {
         this.directory = directory;
         this.name = name;

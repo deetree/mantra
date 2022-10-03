@@ -12,6 +12,12 @@ class ResourcesPathResolver implements Resolver {
     private final Path sourcesPath;
     private final Directory parent;
 
+    /**
+     * Instantiate resources directory path resolver
+     *
+     * @param sourcesPath sources directory path
+     * @param parent      parent directory
+     */
     ResourcesPathResolver(Path sourcesPath, Directory parent) {
         this.sourcesPath = sourcesPath;
         this.parent = parent;
