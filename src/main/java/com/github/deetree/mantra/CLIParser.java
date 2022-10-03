@@ -3,6 +3,8 @@ package com.github.deetree.mantra;
 import picocli.CommandLine;
 
 /**
+ * Command line arguments parser against {@link Arguments} class fields.
+ *
  * @author Mariusz Bal
  */
 class CLIParser {
@@ -15,6 +17,11 @@ class CLIParser {
         this.arguments = arguments;
     }
 
+    /**
+     * Parse command line arguments so the {@link Arguments} fields are filled with appropriate values.
+     *
+     * @return command line interpreter
+     */
     CommandLine parse() {
         CommandLine cmd = new CommandLine(arguments);
         cmd.setOverwrittenOptionsAllowed(true);

@@ -3,6 +3,8 @@ package com.github.deetree.mantra;
 import picocli.CommandLine;
 
 /**
+ * Usage helper class.
+ *
  * @author Mariusz Bal
  */
 class UsageHelper implements Helper {

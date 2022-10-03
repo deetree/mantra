@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
+ * System's text console input reader.
+ *
  * @author Mariusz Bal
  */
 class ConsoleReader implements Reader {
@@ -14,6 +16,11 @@ class ConsoleReader implements Reader {
         this.scanner = new Scanner(inputStream);
     }
 
+    /**
+     * Read line from console.
+     *
+     * @return line that has been read
+     */
     @Override
     public String readLine() {
         return scanner.nextLine();

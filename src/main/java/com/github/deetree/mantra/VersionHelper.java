@@ -3,6 +3,8 @@ package com.github.deetree.mantra;
 import picocli.CommandLine;
 
 /**
+ * Version helper class.
+ *
  * @author Mariusz Bal
  */
 class VersionHelper implements Helper {

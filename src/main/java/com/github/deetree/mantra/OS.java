@@ -3,6 +3,8 @@ package com.github.deetree.mantra;
 import java.util.List;
 
 /**
+ * Operating systems available for detection with their shell commands for native commands executing.
+ *
  * @author Mariusz Bal
  */
 public enum OS {
