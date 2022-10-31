@@ -23,7 +23,6 @@ final class Main {
     private final Printer printer;
     private final Arguments arguments;
     private final File configFile;
-    private ConfigValues configValues;
 
     private Main(Arguments arguments, Printer printer, File configFile) {
         this.arguments = arguments;
@@ -50,7 +49,7 @@ final class Main {
     private void useConfigFile(Configuration configuration) {
         try {
             createBasicConfigIfNotExists(configuration);
-            configValues = configuration.load();
+            ConfigValues configValues = configuration.load();
             arguments.updateWithConfig(configValues);
         } catch (ActionException e) {
             printer.print(WARNING, e.getMessage());
