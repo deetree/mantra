@@ -15,7 +15,7 @@ import java.nio.file.StandardCopyOption;
 @Test
 public class CreateProjectIT {
 
-    private final Path homePath = Path.of(System.getProperty("user.home"));
+    private final Path homePath = Path.of(SystemProperty.USER_HOME.toString());
     private final String projectName = "testProject";
     private final Path configFilePath = homePath.resolve(".mantra.config");
     private final Path configFileBackupPath = homePath.resolve(".mantra.config.backup");

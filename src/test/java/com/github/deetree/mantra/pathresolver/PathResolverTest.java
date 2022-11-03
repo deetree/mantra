@@ -1,5 +1,6 @@
 package com.github.deetree.mantra.pathresolver;
 
+import com.github.deetree.mantra.SystemProperty;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 @Test
 public class PathResolverTest {
 
-    private final String directory = System.getProperty("java.io.tmpdir");
+    private final String directory = SystemProperty.TMP_DIR.toString();
     private final String projectName = "exampleProject";
     private final String src = "src";
     private final String group = "com.xyz.abc.def";

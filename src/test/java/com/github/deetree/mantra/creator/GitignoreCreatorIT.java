@@ -1,5 +1,6 @@
 package com.github.deetree.mantra.creator;
 
+import com.github.deetree.mantra.SystemProperty;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,7 +13,7 @@ public class GitignoreCreatorIT {
 
     public void shouldCopyGitignoreToDirectory() throws IOException {
         //g
-        Path directory = Path.of(System.getProperty("java.io.tmpdir"));
+        Path directory = Path.of(SystemProperty.TMP_DIR.toString());
         Path gitignore = directory.resolve(".gitignore");
         Creator creator = new GitignoreCreator(directory);
         //w

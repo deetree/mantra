@@ -1,5 +1,6 @@
 package com.github.deetree.mantra.creator;
 
+import com.github.deetree.mantra.SystemProperty;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ import static org.testng.Assert.assertEquals;
 @Test
 public class PomCreatorIT {
 
-    private final Path path = Path.of(System.getProperty("java.io.tmpdir"));
+    private final Path path = Path.of(SystemProperty.TMP_DIR.toString());
     private final Path pomPath = path.resolve("pom.xml");
     private final String group = "testGroup";
     private final String artifact = "testArtifact";
