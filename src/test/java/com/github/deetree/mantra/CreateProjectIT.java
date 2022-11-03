@@ -28,7 +28,7 @@ public class CreateProjectIT {
 
     public void shouldUseProjectNameIfNoArtifactProvided() throws IOException {
         //g
-        String[] args = new String[]{"-d", homePath.toString(), projectName};
+        String[] args = new String[]{"-d", homePath.toString(), projectName, "-l"};
         Path directories = Path.of("src", "main", "java", "com", "example", projectName);
         //w
         Main.main(args);
@@ -40,7 +40,7 @@ public class CreateProjectIT {
 
     public void shouldUseArtifactIfProvided() throws IOException {
         String artifact = "myArtifact";
-        String[] args = new String[]{"-d", homePath.toString(), "-a", artifact, projectName};
+        String[] args = new String[]{"-d", homePath.toString(), "-a", artifact, projectName, "-l"};
         Path directories = Path.of("src", "main", "java", "com", "example", artifact);
         //w
         Main.main(args);
