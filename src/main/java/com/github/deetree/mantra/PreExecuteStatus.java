@@ -1,24 +1,18 @@
 package com.github.deetree.mantra;
 
 /**
- * Status informing after certain task is executed.
- * This interface should be implemented by classes which post-execution status should be printed out to the user.
+ * Status informing before certain task is executed.
+ * This interface should be implemented by classes which pre-execution status should be printed out to the user.
  *
  * @author Mariusz Bal
  */
+@FunctionalInterface
 public interface PreExecuteStatus {
 
     /**
-     * Prepare message for successful task completion.
+     * Prepare message for printout prior to the task execution.
      *
-     * @return success message
+     * @return before execution message
      */
-    String makePostExecuteSuccessStatus();
-
-    /**
-     * Prepare message for unsuccessful task completion.
-     *
-     * @return failure message
-     */
-    String makePostExecuteErrorStatus();
+    String makePreExecuteStatus();
 }
