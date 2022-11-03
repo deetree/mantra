@@ -32,7 +32,7 @@ final class Main {
 
     public static void main(String[] args) {
         Main app = new Main(new Arguments(), Printer.getDefault(),
-                new File(System.getProperty("user.home"), ".mantra.config"));
+                new File(SystemProperty.USER_HOME.toString(), ".mantra.config"));
 
         final OS os = app.identifyOs();
         if (os != null) {

@@ -2,6 +2,7 @@ package com.github.deetree.mantra.oscmd;
 
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.SystemProperty;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
@@ -37,7 +38,7 @@ class LocateIntelliJCommand implements NativeCommand {
 
     @Override
     public Result execute() {
-        return execute(os, Path.of(System.getProperty("user.home")),
+        return execute(os, Path.of(SystemProperty.USER_HOME.toString()),
                 findCommand().formatted(launcherPathFile.toString()), printer);
     }
 

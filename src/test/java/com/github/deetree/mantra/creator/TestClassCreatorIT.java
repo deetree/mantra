@@ -1,5 +1,6 @@
 package com.github.deetree.mantra.creator;
 
+import com.github.deetree.mantra.SystemProperty;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,7 +13,7 @@ public class TestClassCreatorIT {
 
     public void shouldContainSubstitutedValues() throws IOException {
         //g
-        Path path = Path.of(System.getProperty("java.io.tmpdir"));
+        Path path = Path.of(SystemProperty.TMP_DIR.toString());
         String group = "testGroup";
         String artifact = "testArtifact";
         String main = "MainClass";
