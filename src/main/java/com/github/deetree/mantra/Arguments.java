@@ -53,6 +53,9 @@ class Arguments implements Runnable {
             preprocessor = ConfigFlagPreprocessor.class)
     boolean configure;
 
+    @Option(names = {"--silent", "-s"}, description = "Use silent output")
+    boolean silentOutput;
+
     @Override
     public void run() {
         if (artifactId == null)
