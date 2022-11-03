@@ -80,7 +80,8 @@ final class Main {
 
             if (!arguments.disableGit)
                 command.executeGit();
-            command.openIntelliJ();
+            if (!arguments.skipIdea)
+                command.openIntelliJ();
         } catch (ActionException e) {
             printer.print(ERROR, e.getMessage());
         }

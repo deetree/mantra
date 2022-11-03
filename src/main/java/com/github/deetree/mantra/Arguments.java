@@ -46,6 +46,9 @@ class Arguments implements Runnable {
     @Option(names = {"--git-email", "-e"}, description = "Set local git email")
     String gitEmail;
 
+    @Option(names = {"--no-idea", "-l"}, description = "Do not launch IntelliJ IDEA")
+    boolean skipIdea;
+
     @Option(names = {"--configure", "-c"}, description = "Create global defaults config file",
             preprocessor = ConfigFlagPreprocessor.class)
     boolean configure;
