@@ -77,7 +77,8 @@ final class Main {
             if (!arguments.silentOutput)
                 printer.resumePrinting();
             prepareBasicApp(os);
-            printer.printErrors();
+            if (arguments.silentOutput)
+                printer.printErrors();
         }
     }
 
