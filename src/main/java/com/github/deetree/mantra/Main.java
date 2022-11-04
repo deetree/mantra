@@ -31,7 +31,7 @@ final class Main {
     }
 
     public static void main(String[] args) {
-        Main app = new Main(new Arguments(), Printer.getDefault(),
+        Main app = new Main(new Arguments(), assignPrinter(),
                 new File(SystemProperty.USER_HOME.toString(), ".mantra.config"));
 
         final OS os = app.identifyOs();
@@ -44,6 +44,12 @@ final class Main {
             if (!app.wasHelpUsed(new UsageHelper(cmd), new VersionHelper(cmd)))
                 app.checkMode(os, configuration);
         }
+    }
+
+    private static Printer assignPrinter() {
+        Printer outputPrinter = Printer.getDefault();
+        outputPrinter.suspendPrinting();
+        return outputPrinter;
     }
 
     private void useConfigFile(Configuration configuration) {
@@ -64,15 +70,19 @@ final class Main {
     }
 
     private void checkMode(OS os, Configuration configuration) {
-        if (arguments.configure)
+        if (arguments.configure) {
+            printer.resumePrinting();
             useConfigMode(configuration);
-        else if (arguments.name != null)
+        } else if (arguments.name != null) {
+            if (!arguments.silentOutput)
+                printer.resumePrinting();
             prepareBasicApp(os);
+            printer.printErrors();
+        }
     }
 
     private void prepareBasicApp(OS os) {
         ResolvedPaths paths = getResolvedPaths();
-
         try {
             createProject(paths);
             Command command = Command.getDefault(paths.projectPath(), os,

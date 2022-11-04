@@ -40,4 +40,6 @@ public interface Printer {
      * Resume output printing.
      */
     void resumePrinting();
+
+    void printErrors();
 }
