@@ -80,7 +80,8 @@ public class SilentOutputIT {
     public void shouldNotPrintOutputSilentFlag() throws IOException {
         //g
         String name = "testProjectShouldNotPrintSilentFlag";
-        String[] args = new String[]{"-d", SystemProperty.TMP_DIR.toString(), name, "-s", "-l"};
+        String[] args = new String[]{"-d", SystemProperty.TMP_DIR.toString(), name, "-s", "-l",
+                "-u", "user", "-e", "email"};
         //w
         Main.main(args);
         //t
