@@ -41,4 +41,9 @@ class ConsolePrinter implements Printer {
         suspendedMessages.forEach(this::printout);
         suspendedMessages.clear();
     }
+
+    @Override
+    public void printErrors() {
+        suspendedMessages.stream().filter(s -> s.contains(Level.ERROR.toString())).forEach(System.out::println);
+    }
 }
