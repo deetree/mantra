@@ -16,9 +16,10 @@ import java.nio.file.StandardCopyOption;
 public class CreateProjectIT {
 
     private final Path homePath = Path.of(SystemProperty.USER_HOME.toString());
+    private final Path directoryPath = Path.of(SystemProperty.TMP_DIR.toString());
     private final String projectName = "testProject";
     private final Path configFilePath = homePath.resolve(".mantra.config");
-    private final Path configFileBackupPath = homePath.resolve(".mantra.config.backup");
+    private final Path configFileBackupPath = directoryPath.resolve(".mantra.config.backup");
 
     @BeforeClass
     private void backupConfig() throws IOException {
@@ -28,26 +29,26 @@ public class CreateProjectIT {
 
     public void shouldUseProjectNameIfNoArtifactProvided() throws IOException {
         //g
-        String[] args = new String[]{"-d", homePath.toString(), projectName, "-l"};
+        String[] args = new String[]{"-d", directoryPath.toString(), projectName, "-l"};
         Path directories = Path.of("src", "main", "java", "com", "example", projectName);
         //w
         Main.main(args);
         //t
-        Assert.assertTrue(Files.isDirectory(homePath.resolve(projectName).resolve(directories)),
+        Assert.assertTrue(Files.isDirectory(directoryPath.resolve(projectName).resolve(directories)),
                 "The unspecified artifactId should map to directory named as project's name");
-        removeDirectory(homePath.resolve(projectName));
+        removeDirectory(directoryPath.resolve(projectName));
     }
 
     public void shouldUseArtifactIfProvided() throws IOException {
         String artifact = "myArtifact";
-        String[] args = new String[]{"-d", homePath.toString(), "-a", artifact, projectName, "-l"};
+        String[] args = new String[]{"-d", directoryPath.toString(), "-a", artifact, projectName, "-l"};
         Path directories = Path.of("src", "main", "java", "com", "example", artifact);
         //w
         Main.main(args);
         //t
-        Assert.assertTrue(Files.isDirectory(homePath.resolve(projectName).resolve(directories)),
+        Assert.assertTrue(Files.isDirectory(directoryPath.resolve(projectName).resolve(directories)),
                 "The specified artifactId should map to directory named as the artifactId");
-        removeDirectory(homePath.resolve(projectName));
+        removeDirectory(directoryPath.resolve(projectName));
     }
 
     private void removeDirectory(Path path) throws IOException {
