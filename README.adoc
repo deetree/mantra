@@ -1,0 +1,153 @@
+= Mantra
+:toc:
+
+The mantra project allows the programmer to easily start a new Java project.
+Actions that previously had to be undertaken in multiple steps and took some time now can easily be automated.
+
+If you are a developer or want to become one, you have to know the process of creating new project in your IDE, clicking through various screens, adding dependencies, creating files, etc.
+Of course, it is quick and simple, as IDE guides you.
+But it can become tedious when repeated multiple times.
+
+== What is mantra doing?
+
+Mantra is just a Java program that creates Maven directory structure and basic POM, .gitignore, class files.
+
+It is also able to initialize the git repository in newly created project directory and configure local git user username and email.
+If the user info is available in the repository the initial commit is created.
+
+Once the project has been fully created and configured, mantra opens it in IntelliJ IDEA.
+It uses the launcher path if provided in mantra config file or attempts to locate it otherwise.
+
+== How to use it?
+
+Mantra was created to be run from terminal with appropriate flags, however these are optional.
+The only obligatory parameter that must be passed while starting mantra is project name.
+
+The optional flags are shown below:
+
+[cols="1,1,1"]
+|===
+^|Short flag ^|Long flag ^|Description
+
+^|`+-a+`
+^|`+--artifact+`
+^|Set Maven artifactId
+
+^|`+-c+`
+^|`+--configure+`
+^|Enter config mode to create global defaults configuration
+
+^|`+-d+`
+^|`+--directory+`
+^|Set directory in which the project will be created
+
+^|`+-e+`
+^|`+--git-email+`
+^|Set local git user email
+
+^|`+-g+`
+^|`+--group+`
+^|Set Maven groupId
+
+^|`+-h+`
+^|`+--help+`
+^|Show usage help
+
+^|`+-j+`
+^|`+--java+`
+^|Set Java version
+
+^|`+-l+`
+^|`+--no-idea+`
+^|Do not launch IDE after project creation
+
+^|`+-m+`
+^|`+--main-class+`
+^|Set main class name
+
+^|`+-n+`
+^|`+--no-git+`
+^|Do not perform git repo initialization and related actions
+
+^|`+-s+`
+^|`+--silent+`
+^|Do not print output (prints only errors)
+
+^|`+-u+`
+^|`+--git-username+`
+^|Set local git user username
+
+^|`+-V+`
+^|`+--version+`
+^|Show version help
+|===
+
+=== Default values
+
+You can enter configuration mode using `+-c+` flag.
+There you will be asked for global defaults that will be used while creating projects.
+In config mode mantra attempts to locate IntelliJ IDEA launcher on your computer.
+You can always provide the launcher path by yourself.
+
+Every time you use mantra it looks for the config (`+.mantra.config+`) file in your user's directory.
+If it finds it the global defaults are taken into consideration.
+Otherwise, it creates a blank config file so that you can customize it on your own.
+
+Configuration parameters should be provided line by line in `+key=value+` format.
+The keys available are as follows:
+
+[cols="1,1"]
+|===
+^|Key ^|Description
+
+^|`+artifactId+`
+^|Default artifactId
+
+^|`+directory+`
+^|Default directory for project creation
+
+^|`+git.email+`
+^|Default local git user email
+
+^|`+git.username+`
+^|Default local git user username
+
+^|`+groupId+`
+^|Default groupId
+
+^|`+ide.launcher+`
+^|IDE launcher path
+
+^|`+mainClass+`
+^|Default main class name
+|===
+
+When you do not specify defaults neither in configuration file nor in command line arguments, mantra will use those provided below:
+
+[cols="1,1"]
+|===
+^|Attribute ^|Mantra's default
+
+^|`+artifactId+`
+^|project name
+
+^|`+directory+`
+^|user's home directory
+
+^|`+git email+`
+^|Global git user email (if provided, otherwise error while creating initial commit)
+
+^|`+git username+`
+^|Global git user username (if provided, otherwise error while creating initial commit)
+
+^|`+groupId+`
+^|com.example
+
+^|`+Java version+`
+^|17
+
+^|`+main class name+`
+^|Main
+|===
+
+If you have defaults configured and specify other while running mantra those from the terminal are *prioritized*.
