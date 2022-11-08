@@ -41,7 +41,8 @@ final class Main {
 
             CommandLine cmd = new CLIParser(args, app.arguments).parse();
 
-            if (!app.wasHelpUsed(new UsageHelper(cmd), new VersionHelper(cmd)))
+            if (cmd.getUnmatchedArguments().isEmpty()
+                    && !app.wasHelpUsed(new UsageHelper(cmd), new VersionHelper(cmd)))
                 app.checkMode(os, configuration);
         }
     }
