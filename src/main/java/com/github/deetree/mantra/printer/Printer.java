@@ -22,14 +22,7 @@ public interface Printer {
      * @param level level of severity
      * @param text  message to be printed out
      */
-    void print(Level level, String text);
-
-    /**
-     * Print message without colors and severity level tags.
-     *
-     * @param text message to be printed out
-     */
-    void print(String text);
+    void print(Message message);
 
     /**
      * Suspend output printing temporarily.

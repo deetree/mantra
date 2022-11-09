@@ -9,7 +9,8 @@ public enum Level {
     ERROR(Color.RED),
     WARNING(Color.YELLOW),
     SUCCESS(Color.GREEN),
-    INFO(Color.BLUE);
+    INFO(Color.BLUE),
+    SYSTEM(Color.CYAN);
 
     private final Color color;
 

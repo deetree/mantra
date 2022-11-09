@@ -3,6 +3,7 @@ package com.github.deetree.mantra.oscmd;
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
 import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Message;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
@@ -61,10 +62,10 @@ class BasicCommand implements Command {
     }
 
     private void executeCommand(NativeCommand command) {
-        printer.print(Level.INFO, command.makePreExecuteStatus());
+        printer.print(new Message(Level.INFO, command.makePreExecuteStatus()));
         if (command.execute() == Result.OK)
-            printer.print(Level.SUCCESS, command.makePostExecuteSuccessStatus());
+            printer.print(new Message(Level.SUCCESS, command.makePostExecuteSuccessStatus()));
         else
-            printer.print(Level.ERROR, command.makePostExecuteErrorStatus());
+            printer.print(new Message(Level.ERROR, command.makePostExecuteErrorStatus()));
     }
 }

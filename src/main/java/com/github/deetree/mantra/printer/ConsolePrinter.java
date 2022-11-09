@@ -10,24 +10,19 @@ import java.util.Collection;
  */
 class ConsolePrinter implements Printer {
 
-    private final Collection<String> suspendedMessages = new ArrayList<>();
+    private final Collection<Message> suspendedMessages = new ArrayList<>();
     private boolean printingSuspended;
 
     @Override
-    public void print(Level level, String text) {
-        print("[%s%s%s] %s".formatted(level.color().toString(), level.name(), Color.RESET, text));
-    }
-
-    @Override
-    public void print(String text) {
+    public void print(Message message) {
         if (printingSuspended)
-            suspendedMessages.add(text);
+            suspendedMessages.add(message);
         else
-            printout(text);
+            printout(message);
     }
 
-    private void printout(String text) {
-        System.out.println(text);
+    private void printout(Message message) {
+        System.out.println(message.toString());
     }
 
     @Override
@@ -44,6 +39,6 @@ class ConsolePrinter implements Printer {
 
     @Override
     public void printErrors() {
-        suspendedMessages.stream().filter(s -> s.contains(Level.ERROR.toString())).forEach(System.out::println);
+        suspendedMessages.stream().filter(m -> m.level() == Level.ERROR).forEach(this::printout);
     }
 }

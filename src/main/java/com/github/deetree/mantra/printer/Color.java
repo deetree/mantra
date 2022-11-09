@@ -1,16 +1,17 @@
 package com.github.deetree.mantra.printer;
 
 /**
- * ANSII colors for printing colored output.
+ * ANSI colors for printing colored output.
  *
  * @author Mariusz Bal
  */
 enum Color {
-    RED("\033[1;31m"),
-    YELLOW("\033[1;33m"),
     BLUE("\033[1;34m"),
+    CYAN("\033[1;36m"),
     GREEN("\033[1;32m"),
-    RESET("\033[0m");
+    RED("\033[1;31m"),
+    RESET("\033[0m"),
+    YELLOW("\033[1;33m");
 
     private final String ansiiColor;
 

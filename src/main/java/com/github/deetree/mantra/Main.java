@@ -7,6 +7,7 @@ import com.github.deetree.mantra.creator.Creator;
 import com.github.deetree.mantra.oscmd.Command;
 import com.github.deetree.mantra.pathresolver.PathResolver;
 import com.github.deetree.mantra.pathresolver.ResolvedPaths;
+import com.github.deetree.mantra.printer.Message;
 import com.github.deetree.mantra.printer.Printer;
 import picocli.CommandLine;
 
@@ -59,15 +60,15 @@ final class Main {
             ConfigValues configValues = configuration.load();
             arguments.updateWithConfig(configValues);
         } catch (ActionException e) {
-            printer.print(WARNING, e.getMessage());
+            printer.print(new Message(WARNING, e.getMessage()));
         }
     }
 
     private void createBasicConfigIfNotExists(Configuration configuration) {
         if (configuration.createConfigFile() == Result.OK)
-            printer.print(SUCCESS, "Basic config file has been created");
+            printer.print(new Message(SUCCESS, "Basic config file has been created"));
         else
-            printer.print(INFO, "Config file has been found");
+            printer.print(new Message(INFO, "Config file has been found"));
     }
 
     private void checkMode(OS os, Configuration configuration) {
@@ -95,34 +96,34 @@ final class Main {
             if (!arguments.skipIdea)
                 command.openIntelliJ();
         } catch (ActionException e) {
-            printer.print(ERROR, e.getMessage());
+            printer.print(new Message(ERROR, e.getMessage()));
         }
     }
 
     private void createProject(ResolvedPaths paths) {
-        printer.print(INFO, "Creating project");
+        printer.print(new Message(INFO, "Creating project"));
         Creator.of(paths.projectPath(), paths.javaMainFilesPath(), paths.mainResourcesPath(),
                 paths.javaTestFilesPath(), paths.testResourcesPath(), arguments.groupId,
                 arguments.artifactId, arguments.mainClass, arguments.javaVersion, printer).create();
-        printer.print(SUCCESS, "Project created successfully");
+        printer.print(new Message(SUCCESS, "Project created successfully"));
     }
 
     private ResolvedPaths getResolvedPaths() {
-        printer.print(INFO, "Resolving paths");
+        printer.print(new Message(INFO, "Resolving paths"));
         ResolvedPaths paths = new PathResolver(arguments.directory, arguments.name,
                 arguments.groupId, arguments.artifactId).resolvePaths();
-        printer.print(SUCCESS, "Resolving paths completed successfully");
+        printer.print(new Message(SUCCESS, "Resolving paths completed successfully"));
         return paths;
     }
 
     private void useConfigMode(Configuration configuration) {
         try {
             if (configuration.configureDefaults() == Result.OK)
-                printer.print(SUCCESS, "Config file with defaults has been created");
+                printer.print(new Message(SUCCESS, "Config file with defaults has been created"));
             else
-                printer.print(WARNING, "Something went wrong during default configuration creating");
+                printer.print(new Message(WARNING, "Something went wrong during default configuration creating"));
         } catch (ActionException e) {
-            printer.print(WARNING, e.getMessage());
+            printer.print(new Message(WARNING, e.getMessage()));
         }
     }
 
@@ -132,13 +133,13 @@ final class Main {
     }
 
     private OS identifyOs() {
-        printer.print(INFO, "Identifying operating system");
+        printer.print(new Message(INFO, "Identifying operating system"));
         OS os = null;
         try {
             os = new OperatingSystem().identify();
-            printer.print(SUCCESS, "Operating system identified (%s)".formatted(os.name()));
+            printer.print(new Message(SUCCESS, "Operating system identified (%s)".formatted(os.name())));
         } catch (OSNotSupportedException e) {
-            printer.print(ERROR, e.getMessage());
+            printer.print(new Message(ERROR, e.getMessage()));
         }
         return os;
     }

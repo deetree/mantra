@@ -3,6 +3,7 @@ package com.github.deetree.mantra.creator;
 import com.github.deetree.mantra.Result;
 import com.github.deetree.mantra.Status;
 import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Message;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.nio.file.Path;
@@ -81,10 +82,10 @@ class BasicCreator implements Creator {
 
     private void executeCreator(Creator creator) {
         Status status = (Status) creator;
-        printer.print(Level.INFO, status.makePreExecuteStatus());
+        printer.print(new Message(Level.INFO, status.makePreExecuteStatus()));
         if (creator.create() == Result.OK)
-            printer.print(Level.SUCCESS, status.makePostExecuteSuccessStatus());
+            printer.print(new Message(Level.SUCCESS, status.makePostExecuteSuccessStatus()));
         else
-            printer.print(Level.ERROR, status.makePostExecuteErrorStatus());
+            printer.print(new Message(Level.ERROR, status.makePostExecuteErrorStatus()));
     }
 }
