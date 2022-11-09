@@ -18,9 +18,10 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 @Test
-public class SilentOutputIT {
+public class OutputIT {
 
     private ByteArrayOutputStream output;
+    private ByteArrayOutputStream error;
     private final String mockInput = IntStream.range(0, 7).mapToObj(i -> System.lineSeparator())
             .collect(Collectors.joining());
 
@@ -35,6 +36,12 @@ public class SilentOutputIT {
         System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
     }
 
+    @BeforeMethod(onlyForGroups = "error")
+    public void setUpErrorStream() {
+        error = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(error));
+    }
+
     @AfterMethod
     public void cleanUp() {
         System.setOut(System.out);
@@ -43,6 +50,11 @@ public class SilentOutputIT {
     @AfterMethod(onlyForGroups = "config")
     public void cleanUpMockInput() {
         System.setIn(System.in);
+    }
+
+    @AfterMethod(onlyForGroups = "error")
+    public void cleanUpErrorStream() {
+        System.setErr(System.err);
     }
 
     public void shouldPrintOutputHelperFlag() {
@@ -116,5 +128,51 @@ public class SilentOutputIT {
         assertFalse(output.toString().isEmpty(), "When no silent flag is provided, " +
                 "the output should be printed out");
         Remover.deleteDirectory(Path.of(SystemProperty.TMP_DIR.toString(), name));
+    }
+
+    @Test(groups = "error")
+    public void shouldOnlyPrintToStandardOutputWhenHelpRequested() {
+        //g
+        String[] args = new String[]{"-h"};
+        //w
+        Main.main(args);
+        //t
+        SoftAssert sa = new SoftAssert();
+        sa.assertFalse(output.toString().isEmpty(), "When help flag is provided the info " +
+                "should be written to the standard output stream");
+        sa.assertTrue(error.toString().isEmpty(), "When help flag is provided nothing " +
+                "should be written to the error stream");
+        sa.assertAll();
+    }
+
+    @Test(groups = "error")
+    public void shouldPrintUnknownOptionWithUsageWhenWrongFlag() {
+        //g
+        String[] args = new String[]{"-c", "-x"};
+        //w
+        Main.main(args);
+        //t
+        String errorStreamOutput = error.toString();
+        SoftAssert sa = new SoftAssert();
+        sa.assertTrue(errorStreamOutput.contains("Unknown option"), "When unknown option is provided " +
+                "the appropriate error should be printed out to the error stream");
+        sa.assertTrue(errorStreamOutput.contains("Usage:"), "When unknown option is provided " +
+                "the usage help should be printed out to the error stream");
+        sa.assertAll();
+    }
+
+    @Test(groups = "error")
+    public void shouldOnlyPrintToErrorStreamWhenWrongFlag() {
+        //g
+        String[] args = new String[]{"-d", SystemProperty.TMP_DIR.toString(), "test", "-x"};
+        //w
+        Main.main(args);
+        //t
+        SoftAssert sa = new SoftAssert();
+        sa.assertFalse(error.toString().isEmpty(), "When wrong flag is provided the info " +
+                "should be written to the error stream");
+        sa.assertTrue(output.toString().isEmpty(), "When wrong flag is provided nothing " +
+                "should be written to the standard output stream");
+        sa.assertAll();
     }
 }
