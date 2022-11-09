@@ -2,6 +2,7 @@ package com.github.deetree.mantra.config;
 
 import com.github.deetree.mantra.Reader;
 import com.github.deetree.mantra.Result;
+import com.github.deetree.mantra.printer.Message;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.io.File;
@@ -44,14 +45,15 @@ class InteractiveConfiguration {
      * @return result of config file writing
      */
     Result configure() {
-        printer.print(INFO, "Interactive config file creating mode. Existing configuration will be overridden.");
-        printer.print(INFO, "Provide defaults for given parameters. Leave empty to skip.");
+        printer.print(new Message(INFO,
+                "Interactive config file creating mode. Existing configuration will be overridden."));
+        printer.print(new Message(INFO, "Provide defaults for given parameters. Leave empty to skip."));
         Arrays.stream(values()).forEach(this::promptForProperty);
         return new ConfigWriter(configFile).createConfig(properties);
     }
 
     private void promptForProperty(PropertyName name) {
-        printer.print(INFO, name.toString() + ":");
+        printer.print(new Message(INFO, name.toString() + ":"));
         printer.suspendPrinting();
         saveProperty(name, reader.readLine());
         printer.resumePrinting();

@@ -3,6 +3,8 @@ package com.github.deetree.mantra.oscmd;
 import com.github.deetree.mantra.OS;
 import com.github.deetree.mantra.Result;
 import com.github.deetree.mantra.Status;
+import com.github.deetree.mantra.printer.Level;
+import com.github.deetree.mantra.printer.Message;
 import com.github.deetree.mantra.printer.Printer;
 
 import java.io.BufferedReader;
@@ -53,7 +55,7 @@ interface NativeCommand extends Status {
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
-            printer.print(line);
+            printer.print(new Message(Level.SYSTEM, line));
         }
     }
 

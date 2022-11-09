@@ -8,8 +8,6 @@ import org.testng.asserts.SoftAssert;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.testng.Assert.assertTrue;
-
 @Test
 public class ConsolePrinterIT {
 
@@ -32,7 +30,7 @@ public class ConsolePrinterIT {
         Level level = Level.WARNING;
         String message = "testMessage";
         //w
-        printer.print(level, message);
+        printer.print(new Message(level, message));
         //t
         String outputString = output.toString();
         SoftAssert sa = new SoftAssert();
@@ -40,15 +38,4 @@ public class ConsolePrinterIT {
         sa.assertTrue(outputString.contains(message));
         sa.assertAll();
     }
-
-    public void shouldPrintTextWithoutLevel() {
-        //g
-        String message = "testMessage2";
-        //w
-        printer.print(message);
-        //t
-        String outputString = output.toString();
-        assertTrue(outputString.contains(message));
-    }
-
 }
