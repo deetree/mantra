@@ -13,8 +13,8 @@ create_mantra_dir() {
 }
 
 download_mantra_jar() {
-  wget $(wget -q -O- https://api.github.com/repos/deetree/mantra/releases/latest \
-  | grep -m 1 -o 'https.*download.*mantra.*.jar') -q -O $HOME/.mantra/mantra.jar
+  curl -L -H "Accept: application/zip" $(curl -s https://api.github.com/repos/deetree/mantra/releases/latest \
+  | grep -m 1 -o 'https.*download.*.jar') -o $HOME/.mantra/mantra.jar
 }
 
 save_run_script() {
@@ -26,9 +26,9 @@ save_run_script() {
     printf "\033[0;33mYou need to have Java installed and set up properly\r\n\033[0m"
   else
     if [ $# -eq 1 ] && [ $1 = "update" ]; then
-      echo "Mantra needs to be updated now, bro!"
-      wget $(wget -q -O- https://api.github.com/repos/deetree/mantra/releases/latest \
-        | grep -m 1 -o 'https.*download.*mantra.*.jar') -q -O $HOME/.mantra/mantra.jar
+      echo "Mantra will be updated now!"
+      curl -L -H "Accept: application/zip" $(curl -s https://api.github.com/repos/deetree/mantra/releases/latest \
+        | grep -m 1 -o 'https.*download.*.jar') -o $HOME/.mantra/mantra.jar
     else
       java -jar $HOME/.mantra/mantra.jar $@
     fi
@@ -52,8 +52,6 @@ check_java() {
     printf "\033[0;33mYou need to have Java installed and set up properly\r\n\033[0m"
   fi
 }
-
-echo $0
 
 create_bin_dir
 create_mantra_dir
