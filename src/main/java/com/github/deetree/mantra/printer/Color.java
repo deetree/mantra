@@ -1,7 +1,7 @@
 package com.github.deetree.mantra.printer;
 
 /**
- * ANSII colors for printing colored output.
+ * ANSI colors for printing colored output.
  *
  * @author Mariusz Bal
  */
