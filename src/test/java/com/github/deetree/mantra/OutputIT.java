@@ -22,7 +22,9 @@ public class OutputIT {
 
     private ByteArrayOutputStream output;
     private ByteArrayOutputStream error;
-    private final String mockInput = IntStream.range(0, 7).mapToObj(i -> System.lineSeparator())
+    private final String mockConfigInput = IntStream.range(0, 7).mapToObj(i -> System.lineSeparator())
+            .collect(Collectors.joining());
+    private final String mockInteractiveInput = IntStream.range(0, 11).mapToObj(i -> System.lineSeparator())
             .collect(Collectors.joining());
 
     @BeforeMethod
@@ -32,8 +34,13 @@ public class OutputIT {
     }
 
     @BeforeMethod(onlyForGroups = "config")
-    public void setUpMockInput() {
-        System.setIn(new ByteArrayInputStream(mockInput.getBytes()));
+    public void setUpMockConfigInput() {
+        System.setIn(new ByteArrayInputStream(mockConfigInput.getBytes()));
+    }
+
+    @BeforeMethod(onlyForGroups = "interactive")
+    public void setUpMockInteractiveInput() {
+        System.setIn(new ByteArrayInputStream(mockInteractiveInput.getBytes()));
     }
 
     @BeforeMethod(onlyForGroups = "error")
@@ -48,7 +55,12 @@ public class OutputIT {
     }
 
     @AfterMethod(onlyForGroups = "config")
-    public void cleanUpMockInput() {
+    public void cleanUpMockConfigInput() {
+        System.setIn(System.in);
+    }
+
+    @AfterMethod(onlyForGroups = "interactive")
+    public void cleanUpMockInteractiveInput() {
         System.setIn(System.in);
     }
 
@@ -173,6 +185,55 @@ public class OutputIT {
                 "should be written to the error stream");
         sa.assertTrue(output.toString().isEmpty(), "When wrong flag is provided nothing " +
                 "should be written to the standard output stream");
+        sa.assertAll();
+    }
+
+    @Test(groups = "error")
+    public void shouldPrintUsageHelpToOutputStreamIfHelpAndInteractiveFlag() {
+        //g
+        String[] args = new String[]{"-h", "-i"};
+        //w
+        Main.main(args);
+        //t
+        SoftAssert sa = new SoftAssert();
+        sa.assertTrue(output.toString().contains("Usage"), "When help and interactive flags are provided " +
+                "the app should not enter interactive mode and just print usage help");
+        sa.assertFalse(output.toString().isEmpty(), "When help flag is provided the info " +
+                "should be written to the standard output stream");
+        sa.assertTrue(error.toString().isEmpty(), "When help flag is provided nothing " +
+                "should be written to the error stream");
+        sa.assertAll();
+    }
+
+    @Test(groups = "error")
+    public void shouldPrintVersionHelpToOutputStreamIfHelpAndInteractiveFlag() {
+        //g
+        String[] args = new String[]{"-V", "-i"};
+        //w
+        Main.main(args);
+        //t
+        SoftAssert sa = new SoftAssert();
+        sa.assertTrue(output.toString().contains("version"), "When help and interactive flags are provided " +
+                "the app should not enter interactive mode and just print version help");
+        sa.assertFalse(output.toString().isEmpty(), "When help flag is provided the info " +
+                "should be written to the standard output stream");
+        sa.assertTrue(error.toString().isEmpty(), "When help flag is provided nothing " +
+                "should be written to the error stream");
+        sa.assertAll();
+    }
+
+    @Test(groups = "interactive")
+    public void shouldPrintPromptsWhenInteractiveFlag() {
+        //g
+        String[] args = new String[]{"-i"};
+        //w
+        Main.main(args);
+        //t
+        SoftAssert sa = new SoftAssert();
+        sa.assertTrue(output.toString().toLowerCase().contains("interactive"), "When interactive " +
+                "mode flag is provided the app should prompt for properties");
+        sa.assertTrue(output.toString().contains(Level.SYSTEM.name()), "The prompts should be printed on " +
+                "SYSTEM level");
         sa.assertAll();
     }
 }
