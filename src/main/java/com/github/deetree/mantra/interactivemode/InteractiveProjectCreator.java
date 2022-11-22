@@ -22,6 +22,12 @@ public class InteractiveProjectCreator {
 
     private final List<String> preparedArgs = new ArrayList<>();
 
+    /**
+     * Instantiate interactive project creating mode.
+     *
+     * @param printer output printer
+     * @param reader  user input reader
+     */
     public InteractiveProjectCreator(Printer printer, Reader reader) {
         this.printer = printer;
         this.reader = reader;

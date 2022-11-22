@@ -20,6 +20,11 @@ enum InteractiveProjectProperty {
 
     private final InteractiveOption option;
 
+    /**
+     * Interactive mode project property.
+     *
+     * @param option interactive project option
+     */
     InteractiveProjectProperty(InteractiveOption option) {this.option = option;}
 
     InteractiveOption option() {
