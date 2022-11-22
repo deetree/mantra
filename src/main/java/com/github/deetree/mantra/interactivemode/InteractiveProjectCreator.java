@@ -18,7 +18,7 @@ import java.util.List;
 public class InteractiveProjectCreator {
 
     private final Printer printer;
-    private final Reader reader; //todo
+    private final Reader reader;
 
     private final List<String> preparedArgs = new ArrayList<>();
 
