@@ -53,6 +53,10 @@ The optional flags are shown below:
 ^|`+--help+`
 ^|Show usage help
 
+^|`+-i+`
+^|`+--interactive+`
+^|Interactive project creating mode
+
 ^|`+-j+`
 ^|`+--java+`
 ^|Set Java version

@@ -1,12 +1,16 @@
 package com.github.deetree.mantra;
 
 import com.github.deetree.mantra.config.ConfigValues;
+import com.github.deetree.mantra.interactivemode.InteractiveProjectCreator;
+import com.github.deetree.mantra.printer.Printer;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -16,7 +20,8 @@ import java.util.Stack;
  */
 @Command(name = "mantra", description = "Kickstart your Java (Maven) project",
         showDefaultValues = true, abbreviateSynopsis = true,
-        mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
+        mixinStandardHelpOptions = true, versionProvider = VersionProvider.class,
+        preprocessor = Arguments.InteractiveMantraPreprocessor.class)
 class Arguments implements Runnable {
 
     @Parameters(description = "Project's name")
@@ -56,6 +61,9 @@ class Arguments implements Runnable {
     @Option(names = {"--silent", "-s"}, description = "Use silent output")
     boolean silentOutput;
 
+    @Option(names = {"--interactive", "-i"}, description = "Interactive project creating")
+    boolean interactiveCreating;
+
     @Override
     public void run() {
         if (artifactId == null)
@@ -87,6 +95,35 @@ class Arguments implements Runnable {
                                   CommandLine.Model.ArgSpec argSpec, Map<String, Object> info) {
             args.push("configModeHelpNotNeeded");
             return false;
+        }
+    }
+
+    /**
+     * Interactive project creating preprocessor that calls prompts for each project property.
+     * The app does not enter interactive mode if any of the help flags is provided.
+     */
+    static class InteractiveMantraPreprocessor implements CommandLine.IParameterPreprocessor {
+
+        @Override
+        public boolean preprocess(Stack<String> args, CommandLine.Model.CommandSpec commandSpec,
+                                  CommandLine.Model.ArgSpec argSpec, Map<String, Object> info) {
+            if (hasInteractiveFlag(args) && hasNoHelpFlag(args)) {
+                args.clear();
+                List<String> interactiveArgs = new InteractiveProjectCreator(Printer.getDefault(), Reader.getDefault())
+                        .prepareArguments();
+                args.addAll(interactiveArgs);
+            }
+            return false;
+        }
+
+        private boolean hasNoHelpFlag(Stack<String> args) {
+            Set<String> helpFlags = Set.of("-h", "--help", "-V", "--version");
+            return helpFlags.stream().noneMatch(args::contains);
+        }
+
+        private boolean hasInteractiveFlag(Stack<String> args) {
+            Set<String> interactiveFlags = Set.of("-i", "--interactive");
+            return interactiveFlags.stream().anyMatch(args::contains);
         }
     }
 }
