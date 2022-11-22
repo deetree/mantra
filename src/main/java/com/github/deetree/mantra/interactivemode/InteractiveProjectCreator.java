@@ -28,6 +28,7 @@ public class InteractiveProjectCreator {
     }
 
     public List<String> prepareArguments() {
+        printer.print(new Message(Level.SYSTEM, "Interactive project creating mode"));
         Arrays.stream(InteractiveProjectProperty.values())
                 .map(InteractiveProjectProperty::option)
                 .forEach(this::consume);
