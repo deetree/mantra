@@ -37,8 +37,7 @@ class IdeLauncherAutoSave {
     String findPath() {
         try {
             Path launcherPathFile = Files.createTempFile("idea_launcher", ".path");
-            Command.getDefault(Path.of(""), os, "", "", printer)
-                    .locateIntelliJ(launcherPathFile);
+            Command.getDefault(Path.of(""), os, printer).locateIntelliJ(launcherPathFile);
             return Files.readString(launcherPathFile).strip();
         } catch (IOException e) {
             return "";
