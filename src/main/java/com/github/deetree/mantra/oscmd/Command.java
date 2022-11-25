@@ -16,15 +16,13 @@ public interface Command {
     /**
      * Static factory method creating object for executing shell commands.
      *
-     * @param projectPath  project path
-     * @param os           operating system
-     * @param gitUsername  local git config username
-     * @param gitUserEmail local git config user email
-     * @param printer      printer
+     * @param projectPath project path
+     * @param os          operating system
+     * @param printer     printer
      * @return {@link BasicCommand} implementing native commands executing methods
      */
-    static Command getDefault(Path projectPath, OS os, String gitUsername, String gitUserEmail, Printer printer) {
-        return new BasicCommand(projectPath, os, gitUsername, gitUserEmail, printer);
+    static Command getDefault(Path projectPath, OS os, Printer printer) {
+        return new BasicCommand(projectPath, os, printer);
     }
 
     /**
@@ -32,7 +30,7 @@ public interface Command {
      *
      * @return command execution result
      */
-    Result executeGit();
+    Result executeGit(String username, String email);
 
     /**
      * IntelliJ opening native command.

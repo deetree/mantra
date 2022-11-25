@@ -88,11 +88,10 @@ final class Main {
         ResolvedPaths paths = getResolvedPaths();
         try {
             createProject(paths);
-            Command command = Command.getDefault(paths.projectPath(), os,
-                    arguments.gitUsername, arguments.gitEmail, printer);
+            Command command = Command.getDefault(paths.projectPath(), os, printer);
 
             if (!arguments.disableGit)
-                command.executeGit();
+                command.executeGit(arguments.gitUsername, arguments.gitEmail);
             if (!arguments.skipIdea)
                 command.openIntelliJ();
         } catch (ActionException e) {

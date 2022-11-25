@@ -18,8 +18,6 @@ class BasicCommand implements Command {
 
     private final Path projectPath;
     private final OS os;
-    private final String gitUsername;
-    private final String gitUserEmail;
     private final Printer printer;
 
     /**
@@ -31,19 +29,17 @@ class BasicCommand implements Command {
      * @param gitUserEmail local git user email
      * @param printer      output printer
      */
-    BasicCommand(Path projectPath, OS os, String gitUsername, String gitUserEmail, Printer printer) {
+    BasicCommand(Path projectPath, OS os, Printer printer) {
         this.projectPath = projectPath;
         this.os = os;
-        this.gitUsername = gitUsername;
-        this.gitUserEmail = gitUserEmail;
         this.printer = printer;
     }
 
     @Override
-    public Result executeGit() {
+    public Result executeGit(String username, String email) {
         Stream.of(
                 new InitializeGitCommand(os, projectPath, printer),
-                new LocalGitUserConfigCommand(os, projectPath, gitUsername, gitUserEmail, printer),
+                new LocalGitUserConfigCommand(os, projectPath, username, email, printer),
                 new CreateInitCommitCommand(os, projectPath, printer)
         ).forEach(this::executeCommand);
         return Result.OK;
