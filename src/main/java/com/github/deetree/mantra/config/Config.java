@@ -48,7 +48,7 @@ public class Config implements Configuration {
     public Result createConfigFile() {
         if (!configExists()) {
             Properties properties = new Properties();
-            properties.setProperty(LAUNCHER.toString(), "");
+            properties.setProperty(LAUNCHER.toString(), configValues.launcher());
             return new ConfigWriter(configFile).createConfig(properties);
         }
         return Result.ERROR;

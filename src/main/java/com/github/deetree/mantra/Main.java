@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 import static com.github.deetree.mantra.printer.Level.*;
 
 /**
+ * Mantra for kick-starting new Java projects.
+ *
  * @author Mariusz Bal
  */
 final class Main {
