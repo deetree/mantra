@@ -17,6 +17,7 @@ class OpenIntelliJCommand implements NativeCommand {
     private final OS os;
     private final Path projectPath;
     private final Printer printer;
+    private final String launcher;
 
     /**
      * IntelliJ IDEA opener.
@@ -24,11 +25,13 @@ class OpenIntelliJCommand implements NativeCommand {
      * @param os          operating system
      * @param projectPath project directory path
      * @param printer     output printer
+     * @param launcher    IDE launcher path string
      */
-    OpenIntelliJCommand(OS os, Path projectPath, Printer printer) {
+    OpenIntelliJCommand(OS os, Path projectPath, Printer printer, String launcher) {
         this.os = os;
         this.projectPath = projectPath;
         this.printer = printer;
+        this.launcher = launcher;
     }
 
     @Override
@@ -38,7 +41,7 @@ class OpenIntelliJCommand implements NativeCommand {
 
     @Override
     public Result execute() {
-        if (execute(os, projectPath, findCommand().formatted(projectPath), printer) != Result.OK)
+        if (execute(os, projectPath, findCommand().formatted(substituteLauncher(), projectPath), printer) != Result.OK)
             throw new ActionException("An exception occurred during IntelliJ IDEA opening");
         return Result.OK;
     }
@@ -55,9 +58,16 @@ class OpenIntelliJCommand implements NativeCommand {
 
     private String findCommand() {
         return switch (os) {
-            case LINUX -> "$(locate idea.sh) %s > /dev/null 2>&1 &";
+            case LINUX -> "%s %s > /dev/null 2>&1 &";
             case WINDOWS -> "for /f \"usebackq tokens=*\" %%i in " +
-                    "(`where /R C:\\PROGRA~1 idea64.exe`) do @start \"\" \"%%i\" %s";
+                    "%s do @start \"\" \"%%i\" %s";
         };
+    }
+
+    private String substituteLauncher() {
+        return launcher.isBlank() ? switch (os) {
+            case LINUX -> "$(locate idea.sh)";
+            case WINDOWS -> "(`where /R C:\\PROGRA~1 idea64.exe`)";
+        } : launcher;
     }
 }

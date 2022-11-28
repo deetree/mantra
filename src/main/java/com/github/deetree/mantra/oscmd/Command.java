@@ -28,6 +28,8 @@ public interface Command {
     /**
      * Execute git related native commands.
      *
+     * @param username local git username
+     * @param email    local git user email
      * @return command execution result
      */
     Result executeGit(String username, String email);
@@ -35,9 +37,10 @@ public interface Command {
     /**
      * IntelliJ opening native command.
      *
+     * @param launcherPath IDE launcher path string
      * @return command execution result
      */
-    Result openIntelliJ();
+    Result openIntelliJ(String launcherPath);
 
     /**
      * Locate IntelliJ launcher path.

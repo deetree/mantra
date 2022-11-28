@@ -25,8 +25,6 @@ class BasicCommand implements Command {
      *
      * @param projectPath  project directory path
      * @param os           operating system
-     * @param gitUsername  local git username
-     * @param gitUserEmail local git user email
      * @param printer      output printer
      */
     BasicCommand(Path projectPath, OS os, Printer printer) {
@@ -46,8 +44,8 @@ class BasicCommand implements Command {
     }
 
     @Override
-    public Result openIntelliJ() {
-        executeCommand(new OpenIntelliJCommand(os, projectPath, printer));
+    public Result openIntelliJ(String launcherPath) {
+        executeCommand(new OpenIntelliJCommand(os, projectPath, printer, launcherPath));
         return Result.OK;
     }
 

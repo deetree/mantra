@@ -17,6 +17,8 @@ import java.util.stream.Stream;
 import static com.github.deetree.mantra.printer.Level.*;
 
 /**
+ * Mantra for kick-starting new Java projects.
+ *
  * @author Mariusz Bal
  */
 final class Main {
@@ -24,6 +26,7 @@ final class Main {
     private final Printer printer;
     private final Arguments arguments;
     private final File configFile;
+    private String launcher;
 
     private Main(Arguments arguments, Printer printer, File configFile) {
         this.arguments = arguments;
@@ -58,6 +61,7 @@ final class Main {
         try {
             createBasicConfigIfNotExists(configuration);
             ConfigValues configValues = configuration.load();
+            launcher = configValues.launcher();
             arguments.updateWithConfig(configValues);
         } catch (ActionException e) {
             printer.print(new Message(WARNING, e.getMessage()));
@@ -93,7 +97,7 @@ final class Main {
             if (!arguments.disableGit)
                 command.executeGit(arguments.gitUsername, arguments.gitEmail);
             if (!arguments.skipIdea)
-                command.openIntelliJ();
+                command.openIntelliJ(launcher);
         } catch (ActionException e) {
             printer.print(new Message(ERROR, e.getMessage()));
         }
