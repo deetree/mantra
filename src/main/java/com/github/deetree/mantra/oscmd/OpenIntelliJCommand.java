@@ -28,7 +28,6 @@ class OpenIntelliJCommand implements NativeCommand {
      * @param launcher    IDE launcher path string
      */
     OpenIntelliJCommand(OS os, Path projectPath, Printer printer, String launcher) {
-
         this.os = os;
         this.projectPath = projectPath;
         this.printer = printer;
