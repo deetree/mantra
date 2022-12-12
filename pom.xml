@@ -16,8 +16,8 @@
         <project.project.build.encoding>UTF-8</project.project.build.encoding>
         <project.build.sourceEncoding>${project.project.build.encoding}</project.build.sourceEncoding>
         <project.build.targetEncoding>${project.project.build.encoding}</project.build.targetEncoding>
-        <testng.version>7.6.1</testng.version>
-        <picocli.version>4.6.3</picocli.version>
+        <testng.version>7.7.0</testng.version>
+        <picocli.version>4.7.0</picocli.version>
         <maven.compiler.plugin.version>3.10.1</maven.compiler.plugin.version>
         <maven.jar.plugin.version>3.2.2</maven.jar.plugin.version>
         <maven.dependency.plugin.version>3.2.0</maven.dependency.plugin.version>
