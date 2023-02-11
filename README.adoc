@@ -136,7 +136,7 @@ When you do not specify defaults neither in configuration file nor in command li
 ^|project name
 
 ^|`+directory+`
-^|user's home directory
+^|user's current working directory
 
 ^|`+git email+`
 ^|Global git user email (if provided, otherwise error while creating initial commit)
