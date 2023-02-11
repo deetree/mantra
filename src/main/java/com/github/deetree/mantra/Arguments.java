@@ -28,7 +28,7 @@ class Arguments implements Runnable {
     String name;
 
     @Option(names = {"--directory", "-d"}, description = "Directory where the project will be created")
-    String directory = SystemProperty.USER_HOME.toString();
+    String directory = SystemProperty.USER_DIR.toString();
 
     @Option(names = {"--group", "-g"}, description = "Project's groupId")
     String groupId = "com.example";

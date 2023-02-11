@@ -6,6 +6,7 @@ package com.github.deetree.mantra;
  * @author Mariusz Bal
  */
 public enum SystemProperty {
+    USER_DIR(System.getProperty("user.dir")),
     USER_HOME(System.getProperty("user.home")),
     TMP_DIR(System.getProperty("java.io.tmpdir"));
 
